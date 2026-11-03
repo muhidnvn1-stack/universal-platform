@@ -1,12 +1,12 @@
+
 <!DOCTYPE html>
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#071426">
 <title>MAKERCHI</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#071426;--panel:#10243d;--blue:#2688ff;--text:#f4f8ff;--muted:#91a8c4;--border:#244467}
@@ -17,21 +17,17 @@ header{display:flex;justify-content:space-between;align-items:center;padding:10p
 .logo{font-size:26px;font-weight:900;letter-spacing:1px}
 .logo span{color:var(--blue)}
 .version{font-size:10px;color:#8fcaff;background:#102e50;padding:7px 10px;border-radius:20px}
-.hero{background:linear-gradient(130deg,#1265c4,#173e83,#10264c);border:1px solid #367ed0;padding:21px;border-radius:22px;margin-bottom:17px;position:relative;overflow:hidden}
-.hero:after{content:"M";position:absolute;right:10px;top:-24px;font-size:130px;font-weight:900;color:#ffffff12}
-.hero h2,.hero p{position:relative;z-index:1}
+.hero{background:linear-gradient(130deg,#1265c4,#173e83,#10264c);border:1px solid #367ed0;padding:21px;border-radius:22px;margin-bottom:17px}
 .hero h2{font-size:20px;margin-bottom:8px}
 .hero p{font-size:12px;line-height:1.6;color:#d4eaff}
 .slider{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:18px;margin:0 0 20px;border:1px solid #285a91;background:#102746;touch-action:pan-y}
-.slides{display:flex;height:100%;transition:transform .55s ease}
-.slide{min-width:100%;height:100%;padding:22px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
-.slide:after{content:"M";position:absolute;right:10px;top:-25px;font-size:145px;font-weight:900;color:#ffffff12}
-.slide:nth-child(1){background:linear-gradient(130deg,#0754a8,#123f78,#071426)}
-.slide:nth-child(2){background:linear-gradient(130deg,#163b80,#087b9e,#071426)}
-.slide:nth-child(3){background:linear-gradient(130deg,#713c9e,#173e83,#071426)}
-.slide h2{font-size:23px;font-weight:900;margin-bottom:10px;position:relative;z-index:1}
-.slide p{font-size:12px;line-height:1.6;color:#d4eaff;max-width:90%;position:relative;z-index:1}
-.slide button{margin-top:15px;padding:10px 15px;border:0;border-radius:10px;background:#2688ff;color:white;font-weight:bold;font-size:12px;width:max-content;position:relative;z-index:1}
+.slides{display:flex;height:100%;transition:transform .45s ease}
+.slide{min-width:100%;height:100%;position:relative;overflow:hidden;background:linear-gradient(130deg,#0754a8,#123f78,#071426)}
+.slide img{width:100%;height:100%;object-fit:cover;display:block}
+.slide-content{height:100%;padding:22px;display:flex;flex-direction:column;justify-content:center}
+.slide-content h2{font-size:23px;margin-bottom:10px}
+.slide-content p{font-size:12px;line-height:1.6;color:#d4eaff}
+.slide-content button{margin-top:15px;padding:10px 15px;border:0;border-radius:10px;background:#2688ff;font-weight:bold;font-size:12px;width:max-content}
 .slider-dots{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:7px;z-index:3}
 .slider-dot{width:7px;height:7px;border:0;border-radius:10px;background:#ffffff66;padding:0}
 .slider-dot.active{width:20px;background:#48c8ff}
@@ -48,7 +44,7 @@ header{display:flex;justify-content:space-between;align-items:center;padding:10p
 .section-title{font-size:17px}
 .section-label{color:var(--muted);font-size:10px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
-.card{background:var(--panel);border:1px solid var(--border);border-radius:17px;padding:15px 12px;min-height:120px;cursor:pointer;transition:.15s}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:17px;padding:15px 12px;min-height:120px;cursor:pointer}
 .emoji{width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:13px;background:#1b4776;font-size:22px;margin-bottom:12px}
 .card h3{font-size:13px;margin-bottom:6px}
 .card p{font-size:10px;color:var(--muted);line-height:1.5}
@@ -56,8 +52,7 @@ header{display:flex;justify-content:space-between;align-items:center;padding:10p
 .bottom h3{font-size:14px;margin-bottom:7px}
 .bottom p{font-size:11px;color:#a9c8e9;line-height:1.5}
 footer{text-align:center;color:#657e9c;font-size:10px;padding:25px 0 5px}
-.page{display:none}
-.page.active{display:block}
+.page{display:none}.page.active{display:block}
 .back{background:#153453;border:1px solid var(--border);border-radius:10px;padding:9px 13px;font-size:12px;margin-bottom:17px}
 .panel{background:var(--panel);border:1px solid var(--border);padding:16px;border-radius:16px;margin-bottom:12px}
 .panel h3{font-size:14px;margin-bottom:12px}
@@ -81,17 +76,20 @@ footer{text-align:center;color:#657e9c;font-size:10px;padding:25px 0 5px}
 .setting{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);font-size:12px;gap:10px}
 .switch{width:42px;height:23px;border:0;border-radius:20px;background:#42536b;position:relative;flex-shrink:0}
 .switch:after{content:"";position:absolute;width:17px;height:17px;top:3px;left:3px;background:white;border-radius:50%;transition:.2s}
-.switch.active{background:var(--blue)}
-.switch.active:after{left:22px}
+.switch.active{background:var(--blue)}.switch.active:after{left:22px}
 .empty{text-align:center;color:var(--muted);font-size:12px;padding:22px 5px}
 .tag{font-size:9px;background:#153d64;color:#9bcfff;padding:5px 8px;border-radius:8px;white-space:nowrap}
 .notice{display:none;position:fixed;bottom:20px;left:16px;right:16px;background:#174477;border:1px solid #398be1;padding:14px;border-radius:13px;text-align:center;font-size:12px;z-index:20}
 .admin-section{scroll-margin-top:15px}
+.banner-admin-item{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)}
+.banner-admin-item img{width:100px;height:56px;object-fit:cover;border-radius:8px}
+.banner-admin-item div{min-width:0;flex:1}
+.banner-admin-item p{font-size:10px;color:var(--muted);overflow-wrap:anywhere}
 @media(min-width:600px){body{max-width:600px;margin:auto}}
 </style>
 </head>
-
 <body>
+
 <header>
  <div class="logo">MAKERCHI<span>.</span></div>
  <div class="version">DIGITAL PLATFORM</div>
@@ -104,23 +102,7 @@ footer{text-align:center;color:#657e9c;font-size:10px;padding:25px 0 5px}
  </div>
 
  <div class="slider" id="makerchiSlider">
-  <div class="slides" id="makerchiSlides">
-   <div class="slide">
-    <h2>🤖 MAKERCHI</h2>
-    <p>Barcha foydali xizmatlar bir platformada! Barchasi bizda!</p>
-    <button onclick="openMakerchiBot()">🚀 Bizga qo‘shiling</button>
-   </div>
-   <div class="slide">
-    <h2>🎁 MAXSUS AKSIYALAR</h2>
-    <p>Yangi takliflar, maxsus aksiyalar va foydali yangiliklar sizni kutmoqda!</p>
-    <button onclick="openMakerchiBot()">Batafsil</button>
-   </div>
-   <div class="slide">
-    <h2>🔥 CHEGIRMALAR</h2>
-    <p>MAKERCHI bilan yangiliklardan xabardor bo‘ling. Bizdan uzoqlashmang!</p>
-    <button onclick="openMakerchiBot()">Kirish</button>
-   </div>
-  </div>
+  <div class="slides" id="makerchiSlides"></div>
   <div class="slider-dots" id="makerchiDots"></div>
  </div>
 
@@ -139,11 +121,7 @@ footer{text-align:center;color:#657e9c;font-size:10px;padding:25px 0 5px}
   </div>
  </div>
 
- <div class="section-head">
-  <h2 class="section-title">🚀 Xizmatlar</h2>
-  <span class="section-label">MAKERCHI</span>
- </div>
-
+ <div class="section-head"><h2 class="section-title">🚀 Xizmatlar</h2><span class="section-label">MAKERCHI</span></div>
  <div class="grid">
   <div class="card" onclick="openSmm()"><div class="emoji">📢</div><h3>SMM xizmatlari</h3><p>Instagram, Telegram va boshqa tarmoqlar</p></div>
   <div class="card" onclick="showService('Avto xabar')"><div class="emoji">📨</div><h3>Avto xabar</h3><p>Rejalashtirilgan xabarlar</p></div>
@@ -154,11 +132,7 @@ footer{text-align:center;color:#657e9c;font-size:10px;padding:25px 0 5px}
   <div class="card" onclick="openCategory('stars')"><div class="emoji">⭐</div><h3>Telegram Stars</h3><p>Stars xizmatlari</p></div>
   <div class="card" onclick="openCategory('premium')"><div class="emoji">💎</div><h3>Premium</h3><p>Telegram Premium xizmatlari</p></div>
  </div>
-
- <div class="bottom">
-  <h3>💙 Bitta platforma — cheksiz imkoniyatlar</h3>
-  <p>Makerchi bilan raqamli xizmatlardan foydalaning.</p>
- </div>
+ <div class="bottom"><h3>💙 Bitta platforma — cheksiz imkoniyatlar</h3><p>Makerchi bilan raqamli xizmatlardan foydalaning.</p></div>
 </main>
 
 <section id="smmPage" class="page">
@@ -225,17 +199,16 @@ footer{text-align:center;color:#657e9c;font-size:10px;padding:25px 0 5px}
   <div class="admin-card" onclick="adminSection('paymentSection')"><div class="emoji">💳</div><h3>To‘lovlar</h3><p>To‘lov sozlamalari</p></div>
   <div class="admin-card" onclick="adminSection('broadcastSection')"><div class="emoji">📨</div><h3>Broadcast</h3><p>Foydalanuvchilarga xabar</p></div>
   <div class="admin-card" onclick="adminSection('servicesSection')"><div class="emoji">🧩</div><h3>Xizmatlar</h3><p>Faollikni boshqarish</p></div>
+  <div class="admin-card" onclick="adminSection('bannersSection')"><div class="emoji">🖼️</div><h3>Bannerlar</h3><p>Rasm qo‘shish va o‘chirish</p></div>
  </div>
 
  <div class="panel admin-section" id="statsSection">
-  <h3>📊 Statistika</h3>
-  <div id="statsInfo" class="small">Statistika yuklanmoqda...</div>
+  <h3>📊 Statistika</h3><div id="statsInfo" class="small">Statistika yuklanmoqda...</div>
   <button class="btn secondary full" onclick="loadStats()">Yangilash</button>
  </div>
 
  <div class="panel admin-section" id="apiSection">
-  <h3>🔌 CheapSMM API v2</h3>
-  <p class="small">API kaliti serverda saqlanadi.</p>
+  <h3>🔌 CheapSMM API v2</h3><p class="small">API kaliti serverda saqlanadi.</p>
   <div class="field"><label>API manzili</label><input value="https://cheap-smm.uz/api/v2" readonly></div>
   <div class="field"><label>API kaliti</label><input id="apiKey" type="password" placeholder="CheapSMM API key"></div>
   <button class="btn full" onclick="saveApi()">API kalitini saqlash</button>
@@ -270,6 +243,15 @@ footer{text-align:center;color:#657e9c;font-size:10px;padding:25px 0 5px}
   <div id="serviceToggles"><div class="empty">Xizmatlar yuklanmoqda...</div></div>
   <button class="btn secondary full" style="margin-top:10px" onclick="loadServices()">Ro‘yxatni yangilash</button>
  </div>
+
+ <div class="panel admin-section" id="bannersSection">
+  <h3>🖼️ Banner boshqaruvi</h3>
+  <p class="small">Tavsiya etilgan rasm o‘lchami: 640×360. Maksimal 4 ta banner.</p>
+  <div class="field"><label>Galereyadan rasm tanlang</label><input id="bannerImage" type="file" accept="image/*"></div>
+  <div class="field"><label>Banner havolasi (ixtiyoriy)</label><input id="bannerLink" type="url" placeholder="https://t.me/..."></div>
+  <button class="btn full" onclick="addBanner()">＋ Banner qo‘shish</button>
+  <div id="bannerAdminList" style="margin-top:15px"></div>
+ </div>
 </section>
 
 <footer>MAKERCHI · Raqamli imkoniyatlar platformasi</footer>
@@ -280,9 +262,8 @@ const tg=window.Telegram?.WebApp;
 if(tg){tg.ready();tg.expand()}
 
 const ADMIN_ID=8589558984;
-const API_BASE=""; // Backend HTTPS manzilini shu yerga yozing.
+const API_BASE="";
 const BOT_URL="https://t.me/Makerchi_Bot";
-
 const initData=tg?.initData||"";
 const user=tg?.initDataUnsafe?.user||null;
 const isAdmin=!!user&&Number(user.id)===ADMIN_ID;
@@ -290,104 +271,31 @@ const isAdmin=!!user&&Number(user.id)===ADMIN_ID;
 let currentServices=[];
 let selectedService=null;
 let currentSpecialCategory="";
+if(user)document.getElementById("welcome").textContent="Salom, "+(user.first_name||"foydalanuvchi")+"! 👋";
 
-/* ISM */
-if(user){
- document.getElementById("welcome").textContent="Salom, "+(user.first_name||"foydalanuvchi")+"! 👋";
-}
-
-/* SLIDER */
-let sliderIndex=0;
-let sliderTimer=null;
-const slides=document.getElementById("makerchiSlides");
-const dotsBox=document.getElementById("makerchiDots");
-const slider=document.getElementById("makerchiSlider");
-const totalSlides=slides.children.length;
-
-for(let i=0;i<totalSlides;i++){
- const dot=document.createElement("button");
- dot.className="slider-dot"+(i===0?" active":"");
- dot.setAttribute("aria-label","Banner "+(i+1));
- dot.onclick=()=>{showSlide(i);startSlider()};
- dotsBox.appendChild(dot);
-}
-function showSlide(index){
- sliderIndex=(index+totalSlides)%totalSlides;
- slides.style.transform=`translateX(-${sliderIndex*100}%)`;
- [...dotsBox.children].forEach((dot,i)=>dot.classList.toggle("active",i===sliderIndex));
-}
-function startSlider(){
- clearInterval(sliderTimer);
- sliderTimer=setInterval(()=>showSlide(sliderIndex+1),3500);
-}
-function openMakerchiBot(){
- if(tg)tg.openTelegramLink(BOT_URL);
- else window.open(BOT_URL,"_blank");
-}
-let touchStartX=0;
-slider.addEventListener("touchstart",e=>{touchStartX=e.touches[0].clientX},{passive:true});
-slider.addEventListener("touchend",e=>{
- const diff=e.changedTouches[0].clientX-touchStartX;
- if(Math.abs(diff)>40){showSlide(sliderIndex+(diff<0?1:-1));startSlider()}
-},{passive:true});
-startSlider();
-
-/* XABAR */
 function notify(message){
  const n=document.getElementById("notice");
- n.textContent=message;
- n.style.display="block";
+ n.textContent=message;n.style.display="block";
  clearTimeout(window.noticeTimer);
  window.noticeTimer=setTimeout(()=>n.style.display="none",3500);
 }
-
-/* HTML XAVFSIZLIGI */
 function escapeHTML(value){
  return String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
 }
-function money(value){
- return Number(value||0).toLocaleString("uz-UZ")+" so‘m";
-}
-function getServiceId(service){
- return Number(service.id??service.service_id);
-}
-function getServiceName(service){
- return service.name||service.title||"Xizmat";
-}
-function getRate(service){
- return Number(service.rate??service.price??0);
-}
-function getMarkup(service){
- return Number(service.markup??0);
-}
-function getUnitPrice(service){
- return getRate(service)*(1+getMarkup(service)/100);
-}
+function money(value){return Number(value||0).toLocaleString("uz-UZ")+" so‘m"}
+function getServiceId(s){return Number(s.id??s.service_id)}
+function getServiceName(s){return s.name||s.title||"Xizmat"}
+function getRate(s){return Number(s.rate??s.price??0)}
+function getMarkup(s){return Number(s.markup??0)}
+function getUnitPrice(s){return getRate(s)*(1+getMarkup(s)/100)}
 
-/* API */
 async function api(path,method="GET",body=null){
- if(!API_BASE){
-  throw new Error("Backend HTTPS manzili ulanmagan. API_BASE manzilini kiriting.");
- }
- if(!initData){
-  throw new Error("Mini App Telegram ichida ochilishi kerak.");
- }
-
- const options={
-  method,
-  headers:{
-   "Content-Type":"application/json",
-   "Authorization":"tma "+initData
-  }
- };
-
+ if(!API_BASE)throw new Error("Backend HTTPS manzili ulanmagan. API_BASE manzilini kiriting.");
+ if(!initData)throw new Error("Mini App Telegram ichida ochilishi kerak.");
+ const options={method,headers:{"Content-Type":"application/json","Authorization":"tma "+initData}};
  if(body!==null)options.body=JSON.stringify(body);
-
  const response=await fetch(API_BASE+path,options);
- let data={};
-
- try{data=await response.json()}catch(e){}
-
+ let data={};try{data=await response.json()}catch(e){}
  if(!response.ok){
   let message=data.detail||data.error||data.message||"Server xatosi: "+response.status;
   if(Array.isArray(message))message=message.map(x=>x.msg||"Xato").join(", ");
@@ -396,46 +304,173 @@ async function api(path,method="GET",body=null){
  return data;
 }
 
+/* RASMLI BANNERLAR */
+let banners=[];
+let sliderIndex=0;
+let sliderTimer=null;
+let touchStartX=0;
+const slides=document.getElementById("makerchiSlides");
+const dotsBox=document.getElementById("makerchiDots");
+const slider=document.getElementById("makerchiSlider");
+
+function loadBanners(){
+ try{banners=JSON.parse(localStorage.getItem("makerchi_banners")||"[]")}
+ catch(e){banners=[]}
+ renderBanners();
+}
+function saveBanners(){
+ try{localStorage.setItem("makerchi_banners",JSON.stringify(banners))}
+ catch(e){notify("Brauzer xotirasi to‘ldi. Kichikroq rasm tanlang.")}
+}
+function renderBanners(){
+ slides.innerHTML="";
+ dotsBox.innerHTML="";
+ if(!banners.length){
+  const slide=document.createElement("div");
+  slide.className="slide";
+  slide.innerHTML='<div class="slide-content"><h2>🤖 MAKERCHI</h2><p>Barcha foydali xizmatlar bir platformada! Barchasi bizda!</p><button onclick="openMakerchiBot()">🚀 Bizga qo‘shiling</button></div>';
+  slides.appendChild(slide);
+ }else{
+  banners.forEach((banner,index)=>{
+   const slide=document.createElement("div");
+   slide.className="slide";
+   const img=document.createElement("img");
+   img.src=banner.image;img.alt="Makerchi banner "+(index+1);
+   slide.appendChild(img);
+   if(banner.link){
+    slide.style.cursor="pointer";
+    slide.addEventListener("click",()=>{
+     if(tg)tg.openLink(banner.link);
+     else window.open(banner.link,"_blank","noopener");
+    });
+   }
+   slides.appendChild(slide);
+   const dot=document.createElement("button");
+   dot.className="slider-dot"+(index===0?" active":"");
+   dot.setAttribute("aria-label","Banner "+(index+1));
+   dot.addEventListener("click",()=>{showSlide(index);startSlider()});
+   dotsBox.appendChild(dot);
+  });
+ }
+ showSlide(Math.min(sliderIndex,slides.children.length-1));
+ startSlider();
+ if(isAdmin)renderBannerAdmin();
+}
+function showSlide(index){
+ const total=slides.children.length;
+ if(!total)return;
+ sliderIndex=(index+total)%total;
+ slides.style.transform=`translateX(-${sliderIndex*100}%)`;
+ [...dotsBox.children].forEach((dot,i)=>dot.classList.toggle("active",i===sliderIndex));
+}
+function startSlider(){
+ clearInterval(sliderTimer);
+ if(banners.length>1)sliderTimer=setInterval(()=>showSlide(sliderIndex+1),3500);
+}
+function openMakerchiBot(){
+ if(tg)tg.openTelegramLink(BOT_URL);
+ else window.open(BOT_URL,"_blank","noopener");
+}
+slider.addEventListener("touchstart",e=>{touchStartX=e.touches[0].clientX},{passive:true});
+slider.addEventListener("touchend",e=>{
+ const diff=e.changedTouches[0].clientX-touchStartX;
+ if(Math.abs(diff)>40){showSlide(sliderIndex+(diff<0?1:-1));startSlider()}
+},{passive:true});
+
+function addBanner(){
+ if(!isAdmin){notify("Faqat admin banner qo‘sha oladi.");return}
+ if(banners.length>=4){notify("Maksimal 4 ta banner qo‘shish mumkin.");return}
+ const file=document.getElementById("bannerImage").files[0];
+ const link=document.getElementById("bannerLink").value.trim();
+ if(!file){notify("Avval rasm tanlang.");return}
+ if(!file.type.startsWith("image/")){notify("Rasm faylini tanlang.");return}
+ if(file.size>8*1024*1024){notify("Rasm 8 MB dan kichik bo‘lishi kerak.");return}
+ if(link&&!/^https?:\/\//i.test(link)){notify("Havola http:// yoki https:// bilan boshlansin.");return}
+
+ const reader=new FileReader();
+ reader.onload=()=>{
+  const image=new Image();
+  image.onload=()=>{
+   const canvas=document.createElement("canvas");
+   canvas.width=640;canvas.height=360;
+   const ctx=canvas.getContext("2d");
+   const scale=Math.max(640/image.width,360/image.height);
+   const width=image.width*scale,height=image.height*scale;
+   ctx.drawImage(image,(640-width)/2,(360-height)/2,width,height);
+   const compressed=canvas.toDataURL("image/jpeg",0.78);
+   banners.push({image:compressed,link});
+   saveBanners();
+   sliderIndex=0;
+   renderBanners();
+   document.getElementById("bannerImage").value="";
+   document.getElementById("bannerLink").value="";
+   notify("Banner qo‘shildi.");
+  };
+  image.onerror=()=>notify("Rasmni o‘qib bo‘lmadi.");
+  image.src=reader.result;
+ };
+ reader.onerror=()=>notify("Rasmni yuklashda xatolik.");
+ reader.readAsDataURL(file);
+}
+function deleteBanner(index){
+ if(!isAdmin)return;
+ if(!confirm("Bu bannerni o‘chirasizmi?"))return;
+ banners.splice(index,1);
+ saveBanners();
+ sliderIndex=0;
+ renderBanners();
+ notify("Banner o‘chirildi.");
+}
+function renderBannerAdmin(){
+ const box=document.getElementById("bannerAdminList");
+ if(!box)return;
+ box.innerHTML="";
+ if(!banners.length){box.innerHTML='<div class="empty">Hozircha banner yo‘q.</div>';return}
+ banners.forEach((banner,index)=>{
+  const row=document.createElement("div");
+  row.className="banner-admin-item";
+  const img=document.createElement("img");
+  img.src=banner.image;
+  const info=document.createElement("div");
+  const title=document.createElement("strong");
+  title.textContent="Banner "+(index+1);
+  title.style.fontSize="12px";
+  const link=document.createElement("p");
+  link.textContent=banner.link||"Havola biriktirilmagan";
+  const del=document.createElement("button");
+  del.className="btn danger";
+  del.textContent="O‘chirish";
+  del.onclick=()=>deleteBanner(index);
+  info.append(title,link,del);
+  row.append(img,info);
+  box.append(row);
+ });
+}
+
 /* SAHIFALAR */
 function openPage(id){
  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
  document.getElementById(id).classList.add("active");
  window.scrollTo(0,0);
-
  if(id==="ordersPage")loadOrders();
  if(id==="historyPage")loadHistory();
- if(id==="adminPage"){
-  loadStats();
-  loadServices();
- }
+ if(id==="adminPage"&&isAdmin){loadStats();loadServices();renderBannerAdmin()}
 }
 function goHome(){openPage("homePage")}
-function adminSection(id){
- document.getElementById(id).scrollIntoView({behavior:"smooth",block:"start"});
-}
-function showService(name){
- notify(name+" bo‘limi hozircha ishga tushirilmagan.");
-}
+function adminSection(id){document.getElementById(id).scrollIntoView({behavior:"smooth",block:"start"})}
+function showService(name){notify(name+" bo‘limi hozircha ishga tushirilmagan.")}
 
 /* BALANS */
 async function loadMe(){
- try{
-  const data=await api("/api/me");
-  document.getElementById("balanceAmount").textContent=money(data.balance);
- }catch(e){
-  document.getElementById("balanceAmount").textContent="— so‘m";
- }
+ try{const data=await api("/api/me");document.getElementById("balanceAmount").textContent=money(data.balance)}
+ catch(e){document.getElementById("balanceAmount").textContent="— so‘m"}
 }
 
 /* XIZMATLAR */
-function openSmm(){
- openPage("smmPage");
- loadServices();
-}
+function openSmm(){openPage("smmPage");loadServices()}
 async function loadServices(){
  const box=document.getElementById("smmList");
  box.innerHTML='<div class="empty">Xizmatlar yuklanmoqda...</div>';
-
  try{
   const data=await api("/api/services");
   currentServices=Array.isArray(data.services)?data.services:[];
@@ -447,496 +482,240 @@ async function loadServices(){
  }
 }
 function renderServices(list){
- const box=document.getElementById("smmList");
- if(!list.length){
-  box.innerHTML='<div class="empty">Hozircha xizmat topilmadi.</div>';
-  return;
- }
-
- box.innerHTML="";
-
- list.forEach(service=>{
-  if(service.active===false)return;
-
-  const id=getServiceId(service);
-  const name=getServiceName(service);
-  const rate=getUnitPrice(service);
-
-  const item=document.createElement("div");
-  item.className="service-item";
-
+ const box=document.getElementById("smmList");box.innerHTML="";
+ const active=list.filter(s=>s.active!==false);
+ if(!active.length){box.innerHTML='<div class="empty">Hozircha xizmat topilmadi.</div>';return}
+ active.forEach(service=>{
+  const item=document.createElement("div");item.className="service-item";
   const left=document.createElement("div");
-  const title=document.createElement("h4");
-  title.textContent=name;
-
-  const desc=document.createElement("p");
-  desc.textContent=(service.description||"SMM xizmati")+" · ID: "+id;
-
+  const title=document.createElement("h4");title.textContent=getServiceName(service);
+  const desc=document.createElement("p");desc.textContent=(service.description||"SMM xizmati")+" · ID: "+getServiceId(service);
   left.append(title,desc);
-
-  const right=document.createElement("div");
-  right.className="price";
-  right.textContent=money(rate)+" / 1000";
-
-  const btn=document.createElement("button");
-  btn.className="btn";
-  btn.textContent="Tanlash";
-  btn.style.marginTop="7px";
-  btn.onclick=()=>selectService(service);
-
-  right.append(btn);
-  item.append(left,right);
-  box.append(item);
+  const right=document.createElement("div");right.className="price";
+  right.textContent=money(getUnitPrice(service))+" / 1000";
+  const btn=document.createElement("button");btn.className="btn";btn.textContent="Tanlash";btn.style.marginTop="7px";btn.onclick=()=>selectService(service);
+  right.append(btn);item.append(left,right);box.append(item);
  });
 }
 function filterServices(){
  const category=document.getElementById("smmCategory").value;
  const query=document.getElementById("serviceSearch").value.toLowerCase().trim();
-
  const filtered=currentServices.filter(s=>{
   const text=(getServiceName(s)+" "+(s.description||"")).toLowerCase();
-
-  const categoryMatch=category==="all"||text.includes(category);
-  const searchMatch=text.includes(query);
-
-  return categoryMatch&&searchMatch&&s.active!==false;
+  return (category==="all"||text.includes(category))&&text.includes(query)&&s.active!==false;
  });
-
  renderServices(filtered);
 }
 
 /* BUYURTMA */
 function selectService(service){
  selectedService=service;
-
  document.getElementById("orderServiceName").textContent=getServiceName(service);
- document.getElementById("orderDescription").textContent=
-  "Xizmat ID: "+getServiceId(service)+
-  " · Narx: "+money(getUnitPrice(service))+" / 1000";
-
+ document.getElementById("orderDescription").textContent="Xizmat ID: "+getServiceId(service)+" · Narx: "+money(getUnitPrice(service))+" / 1000";
  document.getElementById("orderQuantity").value="";
  document.getElementById("orderLink").value="";
  document.getElementById("orderPrice").textContent="— so‘m";
-
  openPage("orderPage");
 }
 function calculateOrder(){
  if(!selectedService)return;
-
  const qty=Number(document.getElementById("orderQuantity").value||0);
- const price=getUnitPrice(selectedService);
-
- if(qty<1||qty>10000000){
-  document.getElementById("orderPrice").textContent="Miqdorni tekshiring";
-  return;
- }
-
- const total=price*qty/1000;
- document.getElementById("orderPrice").textContent=money(Math.ceil(total));
+ if(qty<1||qty>10000000){document.getElementById("orderPrice").textContent="Miqdorni tekshiring";return}
+ document.getElementById("orderPrice").textContent=money(Math.ceil(getUnitPrice(selectedService)*qty/1000));
 }
 async function submitOrder(){
  if(!selectedService)return;
-
  const link=document.getElementById("orderLink").value.trim();
  const quantity=Number(document.getElementById("orderQuantity").value);
-
- if(!link||link.length<8||!quantity||quantity<1||quantity>10000000){
-  notify("Havola va miqdorni to‘g‘ri kiriting.");
-  return;
- }
-
+ if(!link||link.length<8||!quantity||quantity<1||quantity>10000000){notify("Havola va miqdorni to‘g‘ri kiriting.");return}
  try{
-  const result=await api("/api/buy","POST",{
-   service_id:getServiceId(selectedService),
-   link,
-   quantity
-  });
-
+  const result=await api("/api/buy","POST",{service_id:getServiceId(selectedService),link,quantity});
   notify("Buyurtma qabul qilindi. ID: "+result.purchase_id);
-  await loadMe();
-  openPage("ordersPage");
- }catch(e){
-  notify(e.message);
- }
+  await loadMe();openPage("ordersPage");
+ }catch(e){notify(e.message)}
 }
 
 /* STARS / PREMIUM */
 function openCategory(category){
  currentSpecialCategory=category;
-
- const isStars=category==="stars";
- document.getElementById("specialTitle").textContent=isStars?"⭐ Telegram Stars":"💎 Telegram Premium";
- document.getElementById("specialInfo").textContent=isStars?
-  "Telegram Stars bo‘yicha mavjud xizmatlar.":
-  "Telegram Premium bo‘yicha mavjud xizmatlar.";
-
+ const stars=category==="stars";
+ document.getElementById("specialTitle").textContent=stars?"⭐ Telegram Stars":"💎 Telegram Premium";
+ document.getElementById("specialInfo").textContent=stars?"Telegram Stars bo‘yicha mavjud xizmatlar.":"Telegram Premium bo‘yicha mavjud xizmatlar.";
  document.getElementById("specialList").innerHTML='<div class="empty">Xizmatlar yuklanmoqda...</div>';
-
- openPage("specialPage");
- loadSpecial(category);
+ openPage("specialPage");loadSpecial(category);
 }
 async function loadSpecial(category){
  try{
   const data=await api("/api/services");
   const all=Array.isArray(data.services)?data.services:[];
   const keyword=category==="stars"?"star":"premium";
-
-  const list=all.filter(s=>{
-   const text=(getServiceName(s)+" "+(s.description||"")).toLowerCase();
-   return text.includes(keyword)&&s.active!==false;
-  });
-
-  const box=document.getElementById("specialList");
-  box.innerHTML="";
-
-  if(!list.length){
-   box.innerHTML='<div class="empty">Bu bo‘lim uchun xizmat topilmadi.</div>';
-   return;
-  }
-
+  const list=all.filter(s=>(getServiceName(s)+" "+(s.description||"")).toLowerCase().includes(keyword)&&s.active!==false);
+  const box=document.getElementById("specialList");box.innerHTML="";
+  if(!list.length){box.innerHTML='<div class="empty">Bu bo‘lim uchun xizmat topilmadi.</div>';return}
   list.forEach(s=>{
-   const row=document.createElement("div");
-   row.className="service-item";
-
+   const row=document.createElement("div");row.className="service-item";
    const left=document.createElement("div");
-   const title=document.createElement("h4");
-   title.textContent=getServiceName(s);
-
-   const desc=document.createElement("p");
-   desc.textContent=s.description||"Mavjud xizmat";
-
+   const title=document.createElement("h4");title.textContent=getServiceName(s);
+   const desc=document.createElement("p");desc.textContent=s.description||"Mavjud xizmat";
    left.append(title,desc);
-
-   const right=document.createElement("div");
-   right.className="price";
-   right.textContent=money(getUnitPrice(s))+" / 1000";
-
-   const btn=document.createElement("button");
-   btn.className="btn";
-   btn.textContent="Tanlash";
-   btn.style.marginTop="7px";
-   btn.onclick=()=>selectService(s);
-
-   right.append(btn);
-   row.append(left,right);
-   box.append(row);
+   const right=document.createElement("div");right.className="price";right.textContent=money(getUnitPrice(s))+" / 1000";
+   const btn=document.createElement("button");btn.className="btn";btn.textContent="Tanlash";btn.style.marginTop="7px";btn.onclick=()=>selectService(s);
+   right.append(btn);row.append(left,right);box.append(row);
   });
- }catch(e){
-  document.getElementById("specialList").innerHTML='<div class="empty">'+escapeHTML(e.message)+'</div>';
- }
+ }catch(e){document.getElementById("specialList").innerHTML='<div class="empty">'+escapeHTML(e.message)+'</div>'}
 }
 
 /* HISOB TO‘LDIRISH */
 async function startTopup(){
  const amount=Number(document.getElementById("topupAmount").value);
-
- if(!amount||amount<=0||amount>100000000){
-  notify("Summani to‘g‘ri kiriting.");
-  return;
- }
-
+ if(!amount||amount<=0||amount>100000000){notify("Summani to‘g‘ri kiriting.");return}
  try{
   const data=await api("/api/topup","POST",{amount});
-
-  const box=document.getElementById("topupResult");
-  box.style.display="block";
-
-  box.innerHTML=`
-   <div class="panel" style="margin:0;background:#0b1c30">
-    <h3>💳 To‘lov ma’lumotlari</h3>
-    <p class="small">To‘lov summasi</p>
-    <h2 style="margin:6px 0 14px">${money(data.amount||amount)}</h2>
-    <p class="small">Karta raqami</p>
-    <h3 style="margin:6px 0 12px;letter-spacing:1px">${escapeHTML(data.card_number||"Admin bilan bog‘laning")}</h3>
-    <p class="small">Karta egasi</p>
-    <p style="font-size:13px;margin:6px 0 15px">${escapeHTML(data.cardholder||"")}</p>
-    <p class="small">${escapeHTML(data.message||"To‘lovdan so‘ng chekni botga yuboring.")}</p>
-    <button class="btn full" style="margin-top:14px" onclick="openMakerchiBot()">🤖 Botga qaytish va chek yuborish</button>
-   </div>
-  `;
-
+  const box=document.getElementById("topupResult");box.style.display="block";
+  box.innerHTML='<div class="panel" style="margin:0;background:#0b1c30"><h3>💳 To‘lov ma’lumotlari</h3><p class="small">To‘lov summasi</p><h2 style="margin:6px 0 14px">'+money(data.amount||amount)+'</h2><p class="small">Karta raqami</p><h3 style="margin:6px 0 12px;letter-spacing:1px">'+escapeHTML(data.card_number||"Admin bilan bog‘laning")+'</h3><p class="small">Karta egasi</p><p style="font-size:13px;margin:6px 0 15px">'+escapeHTML(data.cardholder||"")+'</p><p class="small">'+escapeHTML(data.message||"To‘lovdan so‘ng chekni botga yuboring.")+'</p><button class="btn full" style="margin-top:14px" onclick="openMakerchiBot()">🤖 Botga qaytish va chek yuborish</button></div>';
   notify("To‘lov ma’lumotlari tayyor.");
- }catch(e){
-  notify(e.message);
- }
+ }catch(e){notify(e.message)}
 }
 
 /* BUYURTMALAR */
 async function loadOrders(){
- const box=document.getElementById("ordersList");
- box.innerHTML='<div class="empty">Yuklanmoqda...</div>';
-
+ const box=document.getElementById("ordersList");box.innerHTML='<div class="empty">Yuklanmoqda...</div>';
  try{
-  const data=await api("/api/orders");
-  const list=data.orders||[];
-
-  if(!list.length){
-   box.innerHTML='<div class="empty">Buyurtmalar yo‘q.</div>';
-   return;
-  }
-
+  const data=await api("/api/orders");const list=data.orders||[];
+  if(!list.length){box.innerHTML='<div class="empty">Buyurtmalar yo‘q.</div>';return}
   box.innerHTML="";
-
   list.forEach(o=>{
-   const row=document.createElement("div");
-   row.className="order-item";
-
+   const row=document.createElement("div");row.className="order-item";
    const left=document.createElement("div");
-   const h=document.createElement("h4");
-   h.textContent=o.service_name||("Buyurtma #"+o.id);
-
-   const p=document.createElement("p");
-   p.textContent="ID: "+o.id+" · "+(o.status||"Kutilmoqda");
-
+   const h=document.createElement("h4");h.textContent=o.service_name||("Buyurtma #"+o.id);
+   const p=document.createElement("p");p.textContent="ID: "+o.id+" · "+(o.status||"Kutilmoqda");
    left.append(h,p);
-
-   const price=document.createElement("span");
-   price.className="price";
-   price.textContent=money(o.amount??o.price??0);
-
-   row.append(left,price);
-   box.append(row);
+   const price=document.createElement("span");price.className="price";price.textContent=money(o.amount??o.price??0);
+   row.append(left,price);box.append(row);
   });
- }catch(e){
-  box.innerHTML='<div class="empty">'+escapeHTML(e.message)+'</div>';
- }
+ }catch(e){box.innerHTML='<div class="empty">'+escapeHTML(e.message)+'</div>'}
 }
 
 /* BALANS TARIXI */
 async function loadHistory(){
- const box=document.getElementById("historyList");
- box.innerHTML='<div class="empty">Yuklanmoqda...</div>';
-
+ const box=document.getElementById("historyList");box.innerHTML='<div class="empty">Yuklanmoqda...</div>';
  try{
-  const data=await api("/api/history");
-  const list=data.history||[];
-
-  if(!list.length){
-   box.innerHTML='<div class="empty">Tarix hozircha bo‘sh.</div>';
-   return;
-  }
-
+  const data=await api("/api/history");const list=data.history||[];
+  if(!list.length){box.innerHTML='<div class="empty">Tarix hozircha bo‘sh.</div>';return}
   box.innerHTML="";
-
   list.forEach(t=>{
-   const row=document.createElement("div");
-   row.className="history-item";
-
+   const row=document.createElement("div");row.className="history-item";
    const left=document.createElement("div");
-   const h=document.createElement("h4");
-   h.textContent=t.description||t.type||"Tranzaksiya";
-
-   const p=document.createElement("p");
-   p.textContent=t.created_at||"";
-
+   const h=document.createElement("h4");h.textContent=t.description||t.type||"Tranzaksiya";
+   const p=document.createElement("p");p.textContent=t.created_at||"";
    left.append(h,p);
-
-   const amount=document.createElement("strong");
-   amount.className="price";
-   amount.textContent=money(t.amount);
-
-   row.append(left,amount);
-   box.append(row);
+   const amount=document.createElement("strong");amount.className="price";amount.textContent=money(t.amount);
+   row.append(left,amount);box.append(row);
   });
- }catch(e){
-  box.innerHTML='<div class="empty">'+escapeHTML(e.message)+'</div>';
- }
+ }catch(e){box.innerHTML='<div class="empty">'+escapeHTML(e.message)+'</div>'}
 }
 
-/* ADMIN */
+/* ADMIN KIRISH */
 if(isAdmin){
- const adminCard=document.createElement("div");
- adminCard.className="card";
-
- const emoji=document.createElement("div");
- emoji.className="emoji";
- emoji.textContent="⚙️";
-
- const title=document.createElement("h3");
- title.textContent="Admin panel";
-
- const desc=document.createElement("p");
- desc.textContent="Platformani boshqarish";
-
- adminCard.append(emoji,title,desc);
- adminCard.onclick=()=>openPage("adminPage");
-
- document.querySelector("#homePage .grid").appendChild(adminCard);
+ const card=document.createElement("div");card.className="card";
+ card.innerHTML='<div class="emoji">⚙️</div><h3>Admin panel</h3><p>Platformani boshqarish</p>';
+ card.onclick=()=>openPage("adminPage");
+ document.querySelector("#homePage .grid").appendChild(card);
 }
 
 /* ADMIN STATISTIKA */
 async function loadStats(){
  try{
   const data=await api("/api/admin/stats");
-
   document.getElementById("statsInfo").innerHTML=
    "Foydalanuvchilar: <b>"+escapeHTML(data.users??0)+"</b><br><br>"+
    "Buyurtmalar: <b>"+escapeHTML(data.orders??0)+"</b><br><br>"+
    "Balanslar jami: <b>"+money(data.balance??0)+"</b><br><br>"+
    "Kutilayotgan to‘lovlar: <b>"+escapeHTML(data.pending_topups??0)+"</b>";
- }catch(e){
-  document.getElementById("statsInfo").textContent=e.message;
- }
+ }catch(e){document.getElementById("statsInfo").textContent=e.message}
 }
 
 /* ADMIN XIZMATLAR */
 function buildServiceToggles(){
- const box=document.getElementById("serviceToggles");
- box.innerHTML="";
-
- if(!currentServices.length){
-  box.innerHTML='<div class="empty">Xizmatlar mavjud emas.</div>';
-  return;
- }
-
+ const box=document.getElementById("serviceToggles");box.innerHTML="";
+ if(!currentServices.length){box.innerHTML='<div class="empty">Xizmatlar mavjud emas.</div>';return}
  currentServices.forEach(service=>{
-  const row=document.createElement("div");
-  row.className="setting";
-
-  const label=document.createElement("span");
-  label.textContent=getServiceName(service)+" · #"+getServiceId(service);
-
-  const btn=document.createElement("button");
-  btn.className="switch"+(service.active!==false?" active":"");
+  const row=document.createElement("div");row.className="setting";
+  const label=document.createElement("span");label.textContent=getServiceName(service)+" · #"+getServiceId(service);
+  const btn=document.createElement("button");btn.className="switch"+(service.active!==false?" active":"");
   btn.onclick=()=>toggleService(service,btn);
-
-  row.append(label,btn);
-  box.append(row);
+  row.append(label,btn);box.append(row);
  });
 }
 async function toggleService(service,button){
  const enabled=!button.classList.contains("active");
-
  try{
-  await api("/api/admin/services/toggle","POST",{
-   service_id:getServiceId(service),
-   active:enabled
-  });
-
-  button.classList.toggle("active",enabled);
-  service.active=enabled;
-  notify("Xizmat holati saqlandi.");
-  renderServices(currentServices);
- }catch(e){
-  notify(e.message);
- }
+  await api("/api/admin/services/toggle","POST",{service_id:getServiceId(service),active:enabled});
+  button.classList.toggle("active",enabled);service.active=enabled;
+  notify("Xizmat holati saqlandi.");renderServices(currentServices);
+ }catch(e){notify(e.message)}
 }
 
 /* CHEAPSMM API */
 async function saveApi(){
  const apiKey=document.getElementById("apiKey").value.trim();
-
- if(apiKey.length<5){
-  notify("API kalitini to‘g‘ri kiriting.");
-  return;
- }
-
+ if(apiKey.length<5){notify("API kalitini to‘g‘ri kiriting.");return}
  try{
-  const data=await api("/api/admin/smm/config","POST",{
-   api_key:apiKey
-  });
-
+  const data=await api("/api/admin/smm/config","POST",{api_key:apiKey});
   document.getElementById("apiKey").value="";
-  document.getElementById("apiStatus").textContent=
-   data.message||"API kaliti serverga saqlandi.";
-
+  document.getElementById("apiStatus").textContent=data.message||"API kaliti serverga saqlandi.";
   notify("API kaliti saqlandi.");
- }catch(e){
-  notify(e.message);
- }
+ }catch(e){notify(e.message)}
 }
 async function testApi(){
  try{
   const data=await api("/api/admin/smm/test","GET");
-
-  document.getElementById("apiStatus").textContent=
-   "Ulanish muvaffaqiyatli. Provayder balansi: "+money(data.balance);
-
+  document.getElementById("apiStatus").textContent="Ulanish muvaffaqiyatli. Provayder balansi: "+money(data.balance);
   notify("API ulanishi ishlayapti.");
- }catch(e){
-  document.getElementById("apiStatus").textContent=e.message;
-  notify(e.message);
- }
+ }catch(e){document.getElementById("apiStatus").textContent=e.message;notify(e.message)}
 }
 async function syncServices(){
  try{
   const data=await api("/api/admin/smm/sync","POST",{});
-
-  document.getElementById("apiStatus").textContent=
-   "Xizmatlar yuklandi. Jami: "+(data.count??0);
-
-  notify("Xizmatlar yangilandi.");
-  await loadServices();
- }catch(e){
-  notify(e.message);
- }
+  document.getElementById("apiStatus").textContent="Xizmatlar yuklandi. Jami: "+(data.count??0);
+  notify("Xizmatlar yangilandi.");await loadServices();
+ }catch(e){notify(e.message)}
 }
 
 /* USTAMA */
 async function saveMarkup(){
  const markup=Number(document.getElementById("markupPercent").value);
-
- if(!Number.isFinite(markup)||markup<0||markup>500){
-  notify("Ustama 0–500 oralig‘ida bo‘lsin.");
-  return;
- }
-
- try{
-  await api("/api/admin/markup","POST",{markup});
-  notify("Ustama saqlandi.");
-  await loadServices();
- }catch(e){
-  notify(e.message);
- }
+ if(!Number.isFinite(markup)||markup<0||markup>500){notify("Ustama 0–500 oralig‘ida bo‘lsin.");return}
+ try{await api("/api/admin/markup","POST",{markup});notify("Ustama saqlandi.");await loadServices()}
+ catch(e){notify(e.message)}
 }
 
 /* TO‘LOV SOZLAMALARI */
 async function savePayment(){
  const card_number=document.getElementById("cardNumber").value.trim();
  const cardholder=document.getElementById("cardHolder").value.trim();
-
- if(card_number.length<16||card_number.length>19||cardholder.length<2){
-  notify("Karta raqami yoki karta egasini tekshiring.");
-  return;
- }
-
+ if(card_number.length<16||card_number.length>19||cardholder.length<2){notify("Karta raqami yoki karta egasini tekshiring.");return}
  try{
-  await api("/api/admin/payment-settings","POST",{
-   card_number,
-   cardholder
-  });
-
+  await api("/api/admin/payment-settings","POST",{card_number,cardholder});
   notify("To‘lov ma’lumotlari saqlandi.");
- }catch(e){
-  notify(e.message);
- }
+ }catch(e){notify(e.message)}
 }
 
 /* BROADCAST */
 async function sendBroadcast(){
  const text=document.getElementById("broadcastText").value.trim();
-
- if(!text){
-  notify("Xabar matnini yozing.");
-  return;
- }
- if(text.length>4000){
-  notify("Xabar 4000 belgidan oshmasligi kerak.");
-  return;
- }
+ if(!text){notify("Xabar matnini yozing.");return}
+ if(text.length>4000){notify("Xabar 4000 belgidan oshmasligi kerak.");return}
  if(!confirm("Barcha foydalanuvchilarga yuborilsinmi?"))return;
-
  try{
   const data=await api("/api/admin/broadcast","POST",{text});
-
   notify("Yuborildi: "+(data.sent??0)+" · Xato: "+(data.failed??0));
   document.getElementById("broadcastText").value="";
- }catch(e){
-  notify(e.message);
- }
+ }catch(e){notify(e.message)}
 }
 
-/* BOSHLANISH */
+/* START */
+loadBanners();
 loadMe();
 </script>
 </body>
