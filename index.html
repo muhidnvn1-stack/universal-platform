@@ -4,95 +4,308 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Universal Platform</title>
+<title>MAKERCHI</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+ --bg:#071426;
+ --panel:#10243d;
+ --panel2:#142d4b;
+ --blue:#2688ff;
+ --cyan:#48c8ff;
+ --text:#f4f8ff;
+ --muted:#91a8c4;
+ --border:#244467;
+}
+
 body{
- background:#0b1020;
- color:#fff;
+ background:var(--bg);
+ color:var(--text);
  font-family:Arial,sans-serif;
- padding:20px;
+ padding:18px;
+ padding-bottom:35px;
 }
-header{padding:15px 0 25px}
-.logo{font-size:27px;font-weight:800;letter-spacing:1px}
-.logo span{color:#8b7cff}
-.sub{color:#929bb1;font-size:13px;margin-top:7px}
-.profile{
- background:#151d32;
- border:1px solid #283450;
- padding:17px;
- border-radius:18px;
+
+header{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:12px 0 24px;
+}
+
+.logo{
+ font-size:27px;
+ font-weight:900;
+ letter-spacing:1px;
+}
+.logo span{color:var(--blue)}
+
+.version{
+ font-size:10px;
+ color:#8fcaff;
+ background:#102e50;
+ padding:7px 10px;
+ border-radius:20px;
+}
+
+.hero{
+ background:linear-gradient(130deg,#1265c4,#173e83,#10264c);
+ border:1px solid #367ed0;
+ padding:22px;
+ border-radius:22px;
  margin-bottom:25px;
+ position:relative;
+ overflow:hidden;
 }
-.profile h2{font-size:19px;margin-bottom:7px}
-.profile p{color:#9ca9c2;font-size:13px}
-.section-title{font-size:18px;margin-bottom:15px}
+
+.hero:after{
+ content:"M";
+ position:absolute;
+ right:10px;
+ top:-24px;
+ font-size:130px;
+ font-weight:900;
+ color:#ffffff12;
+}
+
+.hero h2{
+ font-size:21px;
+ margin-bottom:9px;
+ position:relative;
+ z-index:1;
+}
+
+.hero p{
+ font-size:13px;
+ line-height:1.6;
+ color:#d4eaff;
+ position:relative;
+ z-index:1;
+}
+
+.section-head{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-bottom:15px;
+}
+
+.section-title{font-size:18px}
+
+.section-label{
+ color:var(--muted);
+ font-size:11px;
+}
+
 .grid{
  display:grid;
  grid-template-columns:1fr 1fr;
  gap:12px;
 }
+
 .card{
- background:#151d32;
- border:1px solid #283450;
- border-radius:17px;
- padding:17px 13px;
- min-height:120px;
+ background:var(--panel);
+ border:1px solid var(--border);
+ border-radius:18px;
+ padding:16px 13px;
+ min-height:125px;
  cursor:pointer;
  transition:.2s;
 }
+
 .card:active{transform:scale(.97)}
-.emoji{font-size:27px;margin-bottom:12px}
-.card h3{font-size:15px;margin-bottom:6px}
-.card p{font-size:11px;color:#929bb1;line-height:1.5}
-.bottom{
- margin-top:25px;
- padding:17px;
- border-radius:16px;
- background:linear-gradient(120deg,#5144b9,#252e67);
- text-align:center;
+
+.emoji{
+ width:43px;
+ height:43px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ border-radius:13px;
+ background:#1b4776;
+ font-size:23px;
+ margin-bottom:13px;
 }
-.bottom h3{font-size:16px;margin-bottom:6px}
-.bottom p{font-size:12px;color:#d5d4ff}
+
+.card h3{
+ font-size:14px;
+ margin-bottom:7px;
+}
+
+.card p{
+ font-size:11px;
+ color:var(--muted);
+ line-height:1.5;
+}
+
+.bottom{
+ margin-top:23px;
+ padding:19px;
+ border-radius:18px;
+ background:linear-gradient(120deg,#123f78,#102746);
+ border:1px solid #285a91;
+}
+
+.bottom h3{
+ font-size:15px;
+ margin-bottom:7px;
+}
+
+.bottom p{
+ font-size:12px;
+ color:#a9c8e9;
+ line-height:1.5;
+}
+
 footer{
  text-align:center;
- color:#66718c;
+ color:#657e9c;
  font-size:11px;
- padding:25px 0 10px;
+ padding:25px 0 5px;
 }
+
+#admin{
+ display:none;
+ margin-top:25px;
+}
+
+.admin-title{
+ font-size:19px;
+ margin-bottom:15px;
+}
+
+.admin-grid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px;
+}
+
+.admin-card{
+ background:var(--panel);
+ border:1px solid var(--border);
+ border-radius:15px;
+ padding:15px 12px;
+ cursor:pointer;
+}
+
+.admin-card:active{transform:scale(.97)}
+
+.admin-card .emoji{margin-bottom:9px}
+
+.admin-card h3{
+ font-size:13px;
+ margin-bottom:5px;
+}
+
+.admin-card p{
+ color:var(--muted);
+ font-size:10px;
+}
+
+.admin-card.full{grid-column:1/3}
+
+.admin-section{
+ margin-top:15px;
+ background:var(--panel);
+ border:1px solid var(--border);
+ padding:16px;
+ border-radius:16px;
+}
+
+.admin-section h3{
+ font-size:14px;
+ margin-bottom:13px;
+}
+
+.setting{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:11px 0;
+ border-bottom:1px solid var(--border);
+ font-size:12px;
+}
+
+.setting:last-child{border:0}
+
+.switch{
+ width:42px;
+ height:23px;
+ border:0;
+ border-radius:20px;
+ background:#42536b;
+ position:relative;
+ cursor:pointer;
+}
+
+.switch:after{
+ content:"";
+ position:absolute;
+ width:17px;
+ height:17px;
+ top:3px;
+ left:3px;
+ background:white;
+ border-radius:50%;
+ transition:.2s;
+}
+
+.switch.active{background:var(--blue)}
+.switch.active:after{left:22px}
+
 #notice{
  display:none;
  position:fixed;
  bottom:25px;
- left:20px;
- right:20px;
- background:#283450;
+ left:18px;
+ right:18px;
+ background:#174477;
+ border:1px solid #398be1;
  padding:15px;
- border-radius:12px;
+ border-radius:13px;
  text-align:center;
+ font-size:13px;
+ z-index:10;
+}
+
+.admin-badge{
+ display:inline-block;
+ color:#8ecbff;
+ background:#123c68;
+ padding:5px 9px;
+ border-radius:8px;
+ font-size:10px;
+ margin-bottom:12px;
 }
 </style>
 </head>
+
 <body>
 
 <header>
- <div class="logo">UNIVERSAL<span>+</span></div>
- <div class="sub">Barcha foydali xizmatlar bir joyda</div>
+ <div class="logo">MAKERCHI<span>.</span></div>
+ <div class="version">DIGITAL PLATFORM</div>
 </header>
 
-<div class="profile">
- <h2>Assalomu alaykum! 👋</h2>
- <p>Platformamizga xush kelibsiz.</p>
+<div class="hero">
+ <h2>Salom! 👋 Makerchi'ga xush kelibsiz</h2>
+ <p>Barcha foydali Telegram xizmatlari va raqamli imkoniyatlar — yagona platformada.</p>
 </div>
 
-<h2 class="section-title">🚀 Xizmatlar markazi</h2>
+<div class="section-head">
+ <h2 class="section-title">🚀 Xizmatlar</h2>
+ <span class="section-label">MAKERCHI</span>
+</div>
 
 <div class="grid">
+
  <div class="card" onclick="show('SMM xizmatlari')">
   <div class="emoji">📢</div>
-  <h3>SMM</h3>
-  <p>Reklama va kontent vositalari</p>
+  <h3>SMM xizmatlari</h3>
+  <p>Reklama va ijtimoiy tarmoqlar</p>
  </div>
 
  <div class="card" onclick="show('Avto xabar')">
@@ -110,19 +323,19 @@ footer{
  <div class="card" onclick="show('Kino markazi')">
   <div class="emoji">🎬</div>
   <h3>Kino markazi</h3>
-  <p>Kino va videolar katalogi</p>
+  <p>Kino katalogi</p>
  </div>
 
- <div class="card" onclick="show('Emoji generator')">
+ <div class="card" onclick="show('Emoji yaratish')">
   <div class="emoji">🎨</div>
   <h3>Emoji yaratish</h3>
-  <p>Ijodiy belgilar va stickerlar</p>
+  <p>Emoji va stickerlar</p>
  </div>
 
- <div class="card" onclick="show('Maker Bot')">
+ <div class="card" onclick="show('Bot yaratish')">
   <div class="emoji">🤖</div>
-  <h3>Maker Bot</h3>
-  <p>O‘z Telegram botingizni yarating</p>
+  <h3>Bot yaratish</h3>
+  <p>O‘z Telegram botingiz</p>
  </div>
 
  <div class="card" onclick="show('Telegram Stars')">
@@ -136,29 +349,152 @@ footer{
   <h3>Premium</h3>
   <p>Telegram Premium xizmatlari</p>
  </div>
+
 </div>
 
 <div class="bottom">
- <h3>💜 Bitta platforma — ko‘plab imkoniyatlar</h3>
- <p>Yangi xizmatlar muntazam qo‘shiladi.</p>
+ <h3>💙 Bitta platforma — cheksiz imkoniyatlar</h3>
+ <p>Makerchi bilan raqamli xizmatlardan foydalaning.</p>
 </div>
 
+<!-- ADMIN PANEL -->
+
+<section id="admin">
+
+ <div class="admin-title">⚙️ Admin boshqaruvi</div>
+ <div class="admin-badge">ADMINISTRATOR PANELI</div>
+
+ <div class="admin-grid">
+
+  <div class="admin-card" onclick="adminAction('Statistika')">
+   <div class="emoji">📊</div>
+   <h3>Statistika</h3>
+   <p>Foydalanuvchilar va daromad</p>
+  </div>
+
+  <div class="admin-card" onclick="adminAction('Broadcast')">
+   <div class="emoji">📨</div>
+   <h3>Broadcast</h3>
+   <p>Barcha foydalanuvchilarga xabar</p>
+  </div>
+
+  <div class="admin-card" onclick="adminAction('Narxlar')">
+   <div class="emoji">💰</div>
+   <h3>Narxlar</h3>
+   <p>Xizmat narxlarini boshqarish</p>
+  </div>
+
+  <div class="admin-card" onclick="adminAction('Reklama')">
+   <div class="emoji">📣</div>
+   <h3>Reklama</h3>
+   <p>Reklama buyurtmalari</p>
+  </div>
+
+ </div>
+
+ <div class="admin-section">
+  <h3>💳 To‘lov sozlamalari</h3>
+
+  <div class="setting">
+   <span>Avtomatik to‘lov</span>
+   <button class="switch" onclick="toggle(this)"></button>
+  </div>
+
+  <div class="setting">
+   <span>Oddiy to‘lov</span>
+   <button class="switch" onclick="toggle(this)"></button>
+  </div>
+ </div>
+
+ <div class="admin-section">
+  <h3>🔧 Xizmatlarni boshqarish</h3>
+
+  <div class="setting">
+   <span>SMM xizmatlari</span>
+   <button class="switch active" onclick="toggle(this)"></button>
+  </div>
+
+  <div class="setting">
+   <span>Avto xabar</span>
+   <button class="switch active" onclick="toggle(this)"></button>
+  </div>
+
+  <div class="setting">
+   <span>Nik generator</span>
+   <button class="switch active" onclick="toggle(this)"></button>
+  </div>
+
+  <div class="setting">
+   <span>Kino markazi</span>
+   <button class="switch active" onclick="toggle(this)"></button>
+  </div>
+
+  <div class="setting">
+   <span>Emoji yaratish</span>
+   <button class="switch active" onclick="toggle(this)"></button>
+  </div>
+
+  <div class="setting">
+   <span>Bot yaratish</span>
+   <button class="switch active" onclick="toggle(this)"></button>
+  </div>
+
+  <div class="setting">
+   <span>Telegram Stars</span>
+   <button class="switch active" onclick="toggle(this)"></button>
+  </div>
+
+  <div class="setting">
+   <span>Premium</span>
+   <button class="switch active" onclick="toggle(this)"></button>
+  </div>
+ </div>
+
+</section>
+
 <footer>
- UNIVERSAL+ · Barcha huquqlar himoyalangan
+ MAKERCHI · Raqamli imkoniyatlar platformasi
 </footer>
 
 <div id="notice"></div>
 
 <script>
-const tg=window.Telegram.WebApp;
+const tg = window.Telegram.WebApp;
 tg.ready();
 tg.expand();
 
+const ADMIN_ID = 8589558984;
+
+const user = tg.initDataUnsafe?.user;
+const isAdmin = user && Number(user.id) === ADMIN_ID;
+
+if(isAdmin){
+ document.getElementById("admin").style.display = "block";
+}
+
 function show(name){
- const n=document.getElementById('notice');
- n.innerText=name+" — tez orada ishga tushadi!";
- n.style.display="block";
- setTimeout(()=>n.style.display="none",2500);
+ notify(name + " — tez orada ishga tushadi!");
+}
+
+function adminAction(name){
+ notify(name + " bo‘limi backend bilan ulanishi kerak.");
+}
+
+function toggle(button){
+ button.classList.toggle("active");
+ notify(button.classList.contains("active")
+  ? "Yoqildi (hozircha faqat ko‘rinish o‘zgardi)."
+  : "O‘chirildi (hozircha faqat ko‘rinish o‘zgardi).");
+}
+
+function notify(message){
+ const n = document.getElementById("notice");
+ n.innerText = message;
+ n.style.display = "block";
+ clearTimeout(window.noticeTimer);
+ window.noticeTimer = setTimeout(()=>{
+  n.style.display = "none";
+ },2500);
 }
 </script>
 
