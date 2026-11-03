@@ -4,281 +4,155 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071426">
 <title>MAKERCHI</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-
 :root{
- --bg:#071426;
- --panel:#10243d;
- --panel2:#142d4b;
- --blue:#2688ff;
- --cyan:#48c8ff;
- --text:#f4f8ff;
- --muted:#91a8c4;
- --border:#244467;
+ --bg:#071426;--panel:#10243d;--panel2:#142d4b;
+ --blue:#2688ff;--cyan:#48c8ff;--text:#f4f8ff;
+ --muted:#91a8c4;--border:#244467;--green:#35d69a;
 }
-
 body{
- background:var(--bg);
- color:var(--text);
- font-family:Arial,sans-serif;
- padding:18px;
- padding-bottom:35px;
+ background:var(--bg);color:var(--text);font-family:Arial,sans-serif;
+ padding:16px;padding-bottom:40px;min-height:100vh;
 }
-
+button,input,select{font:inherit}
+button{cursor:pointer;color:inherit}
 header{
- display:flex;
- justify-content:space-between;
- align-items:center;
- padding:12px 0 24px;
+ display:flex;justify-content:space-between;align-items:center;
+ padding:10px 0 20px;
 }
-
-.logo{
- font-size:27px;
- font-weight:900;
- letter-spacing:1px;
-}
+.logo{font-size:26px;font-weight:900;letter-spacing:1px}
 .logo span{color:var(--blue)}
-
 .version{
- font-size:10px;
- color:#8fcaff;
- background:#102e50;
- padding:7px 10px;
- border-radius:20px;
+ font-size:10px;color:#8fcaff;background:#102e50;
+ padding:7px 10px;border-radius:20px;
 }
-
 .hero{
  background:linear-gradient(130deg,#1265c4,#173e83,#10264c);
- border:1px solid #367ed0;
- padding:22px;
- border-radius:22px;
- margin-bottom:25px;
- position:relative;
- overflow:hidden;
+ border:1px solid #367ed0;padding:21px;border-radius:22px;
+ margin-bottom:17px;position:relative;overflow:hidden;
 }
-
 .hero:after{
- content:"M";
- position:absolute;
- right:10px;
- top:-24px;
- font-size:130px;
- font-weight:900;
- color:#ffffff12;
+ content:"M";position:absolute;right:10px;top:-24px;
+ font-size:130px;font-weight:900;color:#ffffff12;
 }
-
-.hero h2{
- font-size:21px;
- margin-bottom:9px;
- position:relative;
- z-index:1;
+.hero h2,.hero p{position:relative;z-index:1}
+.hero h2{font-size:20px;margin-bottom:8px}
+.hero p{font-size:12px;line-height:1.6;color:#d4eaff}
+.balance{
+ background:linear-gradient(120deg,#123f78,#102746);
+ border:1px solid #285a91;border-radius:18px;padding:17px;
+ margin-bottom:23px;
 }
-
-.hero p{
- font-size:13px;
- line-height:1.6;
- color:#d4eaff;
- position:relative;
- z-index:1;
+.balance-top{display:flex;justify-content:space-between;align-items:center}
+.balance-label{font-size:12px;color:#a9c8e9}
+.balance-amount{font-size:25px;font-weight:800;margin-top:8px}
+.balance-actions{display:flex;gap:8px;margin-top:15px}
+.btn{
+ border:0;border-radius:11px;padding:11px 14px;
+ background:var(--blue);font-size:12px;font-weight:700;
 }
-
+.btn.secondary{background:#1a3d61;border:1px solid #35618d}
+.btn.danger{background:#713344}
+.btn:active,.card:active{transform:scale(.98)}
 .section-head{
- display:flex;
- justify-content:space-between;
- align-items:center;
- margin-bottom:15px;
+ display:flex;justify-content:space-between;align-items:center;
+ margin:22px 0 13px;
 }
-
-.section-title{font-size:18px}
-
-.section-label{
- color:var(--muted);
- font-size:11px;
-}
-
-.grid{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:12px;
-}
-
+.section-title{font-size:17px}
+.section-label{color:var(--muted);font-size:10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
 .card{
- background:var(--panel);
- border:1px solid var(--border);
- border-radius:18px;
- padding:16px 13px;
- min-height:125px;
- cursor:pointer;
- transition:.2s;
+ background:var(--panel);border:1px solid var(--border);
+ border-radius:17px;padding:15px 12px;min-height:120px;
+ cursor:pointer;transition:.15s;
 }
-
-.card:active{transform:scale(.97)}
-
 .emoji{
- width:43px;
- height:43px;
- display:flex;
- align-items:center;
- justify-content:center;
- border-radius:13px;
- background:#1b4776;
- font-size:23px;
- margin-bottom:13px;
+ width:42px;height:42px;display:flex;align-items:center;
+ justify-content:center;border-radius:13px;background:#1b4776;
+ font-size:22px;margin-bottom:12px;
 }
-
-.card h3{
- font-size:14px;
- margin-bottom:7px;
-}
-
-.card p{
- font-size:11px;
- color:var(--muted);
- line-height:1.5;
-}
-
+.card h3{font-size:13px;margin-bottom:6px}
+.card p{font-size:10px;color:var(--muted);line-height:1.5}
 .bottom{
- margin-top:23px;
- padding:19px;
- border-radius:18px;
+ margin-top:22px;padding:18px;border-radius:18px;
  background:linear-gradient(120deg,#123f78,#102746);
  border:1px solid #285a91;
 }
-
-.bottom h3{
- font-size:15px;
- margin-bottom:7px;
+.bottom h3{font-size:14px;margin-bottom:7px}
+.bottom p{font-size:11px;color:#a9c8e9;line-height:1.5}
+footer{text-align:center;color:#657e9c;font-size:10px;padding:25px 0 5px}
+.page{display:none}
+.page.active{display:block}
+.back{
+ background:#153453;border:1px solid var(--border);
+ border-radius:10px;padding:9px 13px;font-size:12px;margin-bottom:17px;
 }
-
-.bottom p{
- font-size:12px;
- color:#a9c8e9;
- line-height:1.5;
+.panel{
+ background:var(--panel);border:1px solid var(--border);
+ padding:16px;border-radius:16px;margin-bottom:12px;
 }
-
-footer{
- text-align:center;
- color:#657e9c;
- font-size:11px;
- padding:25px 0 5px;
+.panel h3{font-size:14px;margin-bottom:12px}
+.field{margin:11px 0}
+.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:7px}
+.field input,.field select{
+ width:100%;padding:12px;background:#081a2e;
+ color:white;border:1px solid var(--border);border-radius:10px;
+ outline:none;font-size:12px;
 }
-
-#admin{
- display:none;
- margin-top:25px;
+.field input:focus,.field select:focus{border-color:var(--blue)}
+.full{width:100%}
+.service-item,.order-item,.history-item{
+ padding:13px 0;border-bottom:1px solid var(--border);
+ display:flex;justify-content:space-between;align-items:center;gap:10px;
 }
-
-.admin-title{
- font-size:19px;
- margin-bottom:15px;
+.service-item:last-child,.order-item:last-child,.history-item:last-child{border:0}
+.service-item h4,.order-item h4{font-size:12px;margin-bottom:5px}
+.service-item p,.order-item p,.history-item p{font-size:10px;color:var(--muted)}
+.price{font-size:12px;color:#8ecbff;font-weight:700;white-space:nowrap}
+.small{font-size:10px;color:var(--muted);line-height:1.5}
+.notice{
+ display:none;position:fixed;bottom:20px;left:16px;right:16px;
+ background:#174477;border:1px solid #398be1;padding:14px;
+ border-radius:13px;text-align:center;font-size:12px;z-index:20;
 }
-
-.admin-grid{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:10px;
+.admin-badge{
+ display:inline-block;color:#8ecbff;background:#123c68;
+ padding:5px 9px;border-radius:8px;font-size:10px;margin-bottom:12px;
 }
-
+.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .admin-card{
- background:var(--panel);
- border:1px solid var(--border);
- border-radius:15px;
- padding:15px 12px;
- cursor:pointer;
+ background:var(--panel);border:1px solid var(--border);
+ border-radius:15px;padding:14px 11px;cursor:pointer;
 }
-
-.admin-card:active{transform:scale(.97)}
-
-.admin-card .emoji{margin-bottom:9px}
-
-.admin-card h3{
- font-size:13px;
- margin-bottom:5px;
-}
-
-.admin-card p{
- color:var(--muted);
- font-size:10px;
-}
-
-.admin-card.full{grid-column:1/3}
-
-.admin-section{
- margin-top:15px;
- background:var(--panel);
- border:1px solid var(--border);
- padding:16px;
- border-radius:16px;
-}
-
-.admin-section h3{
- font-size:14px;
- margin-bottom:13px;
-}
-
+.admin-card .emoji{margin-bottom:8px}
+.admin-card h3{font-size:12px;margin-bottom:5px}
+.admin-card p{font-size:10px;color:var(--muted)}
 .setting{
- display:flex;
- justify-content:space-between;
- align-items:center;
- padding:11px 0;
- border-bottom:1px solid var(--border);
- font-size:12px;
+ display:flex;justify-content:space-between;align-items:center;
+ padding:12px 0;border-bottom:1px solid var(--border);font-size:12px;
 }
-
-.setting:last-child{border:0}
-
 .switch{
- width:42px;
- height:23px;
- border:0;
- border-radius:20px;
- background:#42536b;
- position:relative;
- cursor:pointer;
+ width:42px;height:23px;border:0;border-radius:20px;
+ background:#42536b;position:relative;
 }
-
 .switch:after{
- content:"";
- position:absolute;
- width:17px;
- height:17px;
- top:3px;
- left:3px;
- background:white;
- border-radius:50%;
- transition:.2s;
+ content:"";position:absolute;width:17px;height:17px;top:3px;left:3px;
+ background:white;border-radius:50%;transition:.2s;
 }
-
 .switch.active{background:var(--blue)}
 .switch.active:after{left:22px}
-
-#notice{
- display:none;
- position:fixed;
- bottom:25px;
- left:18px;
- right:18px;
- background:#174477;
- border:1px solid #398be1;
- padding:15px;
- border-radius:13px;
- text-align:center;
- font-size:13px;
- z-index:10;
+.empty{text-align:center;color:var(--muted);font-size:12px;padding:22px 5px}
+.tag{
+ font-size:9px;background:#153d64;color:#9bcfff;
+ padding:5px 8px;border-radius:8px;white-space:nowrap;
 }
-
-.admin-badge{
- display:inline-block;
- color:#8ecbff;
- background:#123c68;
- padding:5px 9px;
- border-radius:8px;
- font-size:10px;
- margin-bottom:12px;
+@media(min-width:600px){
+ body{max-width:600px;margin:auto}
 }
 </style>
 </head>
@@ -290,213 +164,645 @@ footer{
  <div class="version">DIGITAL PLATFORM</div>
 </header>
 
-<div class="hero">
- <h2>Salom! 👋 Makerchi'ga xush kelibsiz</h2>
- <p>Barcha foydali Telegram xizmatlari va raqamli imkoniyatlar — yagona platformada.</p>
-</div>
-
-<div class="section-head">
- <h2 class="section-title">🚀 Xizmatlar</h2>
- <span class="section-label">MAKERCHI</span>
-</div>
-
-<div class="grid">
-
- <div class="card" onclick="show('SMM xizmatlari')">
-  <div class="emoji">📢</div>
-  <h3>SMM xizmatlari</h3>
-  <p>Reklama va ijtimoiy tarmoqlar</p>
+<!-- BOSH SAHIFA -->
+<main id="homePage" class="page active">
+ <div class="hero">
+  <h2 id="welcome">Salom! 👋 Makerchi'ga xush kelibsiz</h2>
+  <p>Barcha foydali Telegram xizmatlari va raqamli imkoniyatlar — yagona platformada.</p>
  </div>
 
- <div class="card" onclick="show('Avto xabar')">
-  <div class="emoji">📨</div>
-  <h3>Avto xabar</h3>
-  <p>Rejalashtirilgan xabarlar</p>
+ <div class="balance">
+  <div class="balance-top">
+   <div>
+    <div class="balance-label">💳 Mening balansim</div>
+    <div class="balance-amount" id="balanceAmount">Yuklanmoqda...</div>
+   </div>
+   <span class="tag">UZS</span>
+  </div>
+  <div class="balance-actions">
+   <button class="btn" onclick="openPage('topupPage')">＋ Hisobni to‘ldirish</button>
+   <button class="btn secondary" onclick="openPage('historyPage')">Tarix</button>
+  </div>
  </div>
 
- <div class="card" onclick="show('Nik generator')">
-  <div class="emoji">✨</div>
-  <h3>Nik generator</h3>
-  <p>Chiroyli niklar yaratish</p>
+ <div class="section-head">
+  <h2 class="section-title">🚀 Xizmatlar</h2>
+  <span class="section-label">MAKERCHI</span>
  </div>
 
- <div class="card" onclick="show('Kino markazi')">
-  <div class="emoji">🎬</div>
-  <h3>Kino markazi</h3>
-  <p>Kino katalogi</p>
+ <div class="grid">
+  <div class="card" onclick="openSmm()">
+   <div class="emoji">📢</div><h3>SMM xizmatlari</h3>
+   <p>Instagram, Telegram va boshqa tarmoqlar</p>
+  </div>
+  <div class="card" onclick="showService('Avto xabar')">
+   <div class="emoji">📨</div><h3>Avto xabar</h3>
+   <p>Rejalashtirilgan xabarlar</p>
+  </div>
+  <div class="card" onclick="showService('Nik generator')">
+   <div class="emoji">✨</div><h3>Nik generator</h3>
+   <p>Chiroyli niklar yaratish</p>
+  </div>
+  <div class="card" onclick="showService('Kino markazi')">
+   <div class="emoji">🎬</div><h3>Kino markazi</h3>
+   <p>Kino katalogi</p>
+  </div>
+  <div class="card" onclick="showService('Emoji yaratish')">
+   <div class="emoji">🎨</div><h3>Emoji yaratish</h3>
+   <p>Emoji va stickerlar</p>
+  </div>
+  <div class="card" onclick="showService('Bot yaratish')">
+   <div class="emoji">🤖</div><h3>Bot yaratish</h3>
+   <p>O‘z Telegram botingiz</p>
+  </div>
+  <div class="card" onclick="openCategory('stars')">
+   <div class="emoji">⭐</div><h3>Telegram Stars</h3>
+   <p>Stars xizmatlari</p>
+  </div>
+  <div class="card" onclick="openCategory('premium')">
+   <div class="emoji">💎</div><h3>Premium</h3>
+   <p>Telegram Premium xizmatlari</p>
+  </div>
  </div>
 
- <div class="card" onclick="show('Emoji yaratish')">
-  <div class="emoji">🎨</div>
-  <h3>Emoji yaratish</h3>
-  <p>Emoji va stickerlar</p>
+ <div class="bottom">
+  <h3>💙 Bitta platforma — cheksiz imkoniyatlar</h3>
+  <p>Makerchi bilan raqamli xizmatlardan foydalaning.</p>
  </div>
+</main>
 
- <div class="card" onclick="show('Bot yaratish')">
-  <div class="emoji">🤖</div>
-  <h3>Bot yaratish</h3>
-  <p>O‘z Telegram botingiz</p>
+<!-- SMM KATALOG -->
+<section id="smmPage" class="page">
+ <button class="back" onclick="goHome()">← Bosh sahifa</button>
+ <div class="section-head">
+  <h2 class="section-title">📢 SMM xizmatlari</h2>
+  <span class="section-label">KATALOG</span>
  </div>
-
- <div class="card" onclick="show('Telegram Stars')">
-  <div class="emoji">⭐</div>
-  <h3>Telegram Stars</h3>
-  <p>Stars xizmatlari</p>
+ <div class="panel">
+  <div class="field">
+   <label>Kategoriya</label>
+   <select id="smmCategory" onchange="filterServices()">
+    <option value="all">Barcha xizmatlar</option>
+    <option value="instagram">Instagram</option>
+    <option value="telegram">Telegram</option>
+    <option value="youtube">YouTube</option>
+    <option value="tiktok">TikTok</option>
+   </select>
+  </div>
+  <div class="field">
+   <label>Qidirish</label>
+   <input id="serviceSearch" placeholder="Xizmat nomini yozing..." oninput="filterServices()">
+  </div>
  </div>
-
- <div class="card" onclick="show('Premium')">
-  <div class="emoji">💎</div>
-  <h3>Premium</h3>
-  <p>Telegram Premium xizmatlari</p>
+ <div class="panel">
+  <h3>🛍 Xizmatlar ro‘yxati</h3>
+  <div id="smmList"><div class="empty">Xizmatlar yuklanmoqda...</div></div>
  </div>
+</section>
 
-</div>
+<!-- STARS / PREMIUM -->
+<section id="specialPage" class="page">
+ <button class="back" onclick="goHome()">← Bosh sahifa</button>
+ <div class="section-head"><h2 class="section-title" id="specialTitle">⭐ Telegram Stars</h2></div>
+ <div class="panel">
+  <p class="small" id="specialInfo">Kerakli xizmatni tanlang.</p>
+  <div id="specialList"></div>
+ </div>
+ <p class="small">Buyurtma mavjud xizmat va tasdiqlangan to‘lov usuliga qarab bajariladi.</p>
+</section>
 
-<div class="bottom">
- <h3>💙 Bitta platforma — cheksiz imkoniyatlar</h3>
- <p>Makerchi bilan raqamli xizmatlardan foydalaning.</p>
-</div>
+<!-- BUYURTMA -->
+<section id="orderPage" class="page">
+ <button class="back" onclick="openPage('smmPage')">← Xizmatlarga qaytish</button>
+ <div class="section-head"><h2 class="section-title">🛒 Buyurtma berish</h2></div>
+ <div class="panel">
+  <h3 id="orderServiceName">Xizmat</h3>
+  <p class="small" id="orderDescription"></p>
+  <div class="field">
+   <label>Havola yoki username</label>
+   <input id="orderLink" placeholder="https://... yoki @username">
+  </div>
+  <div class="field">
+   <label>Miqdor</label>
+   <input id="orderQuantity" type="number" min="1" placeholder="Masalan: 1000" oninput="calculateOrder()">
+  </div>
+  <div class="setting">
+   <span>Taxminiy narx</span>
+   <strong id="orderPrice">— so‘m</strong>
+  </div>
+  <button class="btn full" onclick="submitOrder()">Buyurtmani tasdiqlash</button>
+  <p class="small" style="margin-top:10px">Buyurtma berishdan oldin havola va miqdorni tekshiring.</p>
+ </div>
+</section>
 
-<!-- ADMIN PANEL -->
+<!-- BALANS TOPUP -->
+<section id="topupPage" class="page">
+ <button class="back" onclick="goHome()">← Bosh sahifa</button>
+ <div class="section-head"><h2 class="section-title">💳 Hisobni to‘ldirish</h2></div>
+ <div class="panel">
+  <p class="small">To‘ldirmoqchi bo‘lgan summangizni kiriting. To‘lovni bot orqali davom ettirasiz.</p>
+  <div class="field">
+   <label>Summa (so‘m)</label>
+   <input id="topupAmount" type="number" min="1000" placeholder="Masalan: 10000">
+  </div>
+  <button class="btn full" onclick="startTopup()">Davom etish</button>
+ </div>
+</section>
 
-<section id="admin">
+<!-- BUYURTMALAR -->
+<section id="ordersPage" class="page">
+ <button class="back" onclick="goHome()">← Bosh sahifa</button>
+ <div class="section-head"><h2 class="section-title">📦 Buyurtmalarim</h2></div>
+ <div class="panel" id="ordersList"><div class="empty">Buyurtmalar yuklanmoqda...</div></div>
+</section>
 
- <div class="admin-title">⚙️ Admin boshqaruvi</div>
+<!-- TARIX -->
+<section id="historyPage" class="page">
+ <button class="back" onclick="goHome()">← Bosh sahifa</button>
+ <div class="section-head"><h2 class="section-title">📊 Balans tarixi</h2></div>
+ <div class="panel" id="historyList"><div class="empty">Tarix yuklanmoqda...</div></div>
+</section>
+
+<!-- ADMIN -->
+<section id="adminPage" class="page">
+ <button class="back" onclick="goHome()">← Bosh sahifa</button>
+ <div class="section-head"><h2 class="section-title">⚙️ Admin boshqaruvi</h2></div>
  <div class="admin-badge">ADMINISTRATOR PANELI</div>
 
  <div class="admin-grid">
-
-  <div class="admin-card" onclick="adminAction('Statistika')">
-   <div class="emoji">📊</div>
-   <h3>Statistika</h3>
-   <p>Foydalanuvchilar va daromad</p>
+  <div class="admin-card" onclick="adminSection('statsSection')">
+   <div class="emoji">📊</div><h3>Statistika</h3><p>Foydalanuvchilar va daromad</p>
   </div>
-
-  <div class="admin-card" onclick="adminAction('Broadcast')">
-   <div class="emoji">📨</div>
-   <h3>Broadcast</h3>
-   <p>Barcha foydalanuvchilarga xabar</p>
+  <div class="admin-card" onclick="adminSection('apiSection')">
+   <div class="emoji">🔌</div><h3>SMM API</h3><p>API ulash va xizmatlarni yuklash</p>
   </div>
-
-  <div class="admin-card" onclick="adminAction('Narxlar')">
-   <div class="emoji">💰</div>
-   <h3>Narxlar</h3>
-   <p>Xizmat narxlarini boshqarish</p>
+  <div class="admin-card" onclick="adminSection('pricesSection')">
+   <div class="emoji">💰</div><h3>Narxlar</h3><p>Ustama va narxlar</p>
   </div>
-
-  <div class="admin-card" onclick="adminAction('Reklama')">
-   <div class="emoji">📣</div>
-   <h3>Reklama</h3>
-   <p>Reklama buyurtmalari</p>
+  <div class="admin-card" onclick="adminSection('paymentSection')">
+   <div class="emoji">💳</div><h3>To‘lovlar</h3><p>To‘lov sozlamalari</p>
   </div>
-
+  <div class="admin-card" onclick="adminSection('broadcastSection')">
+   <div class="emoji">📨</div><h3>Broadcast</h3><p>Foydalanuvchilarga xabar</p>
+  </div>
+  <div class="admin-card" onclick="adminSection('servicesSection')">
+   <div class="emoji">🧩</div><h3>Xizmatlar</h3><p>Bo‘limlarni boshqarish</p>
+  </div>
  </div>
 
- <div class="admin-section">
+ <div class="admin-section panel" id="statsSection">
+  <h3>📊 Statistika</h3>
+  <div id="statsInfo" class="small">Backend ulangach statistika ko‘rinadi.</div>
+  <button class="btn secondary full" onclick="loadStats()">Yangilash</button>
+ </div>
+
+ <div class="admin-section panel" id="apiSection">
+  <h3>🔌 SMM API sozlamalari</h3>
+  <p class="small">API kaliti faqat serverga yuboriladi. Uni Mini App yoki GitHub kodida saqlamaymiz.</p>
+  <div class="field">
+   <label>API manzili</label>
+   <input id="apiUrl" placeholder="https://panel.example/api/v2">
+  </div>
+  <div class="field">
+   <label>API kaliti</label>
+   <input id="apiKey" type="password" placeholder="API key">
+  </div>
+  <button class="btn full" onclick="saveApi()">API sozlamalarini saqlash</button>
+  <button class="btn secondary full" style="margin-top:9px" onclick="testApi()">Ulanishni tekshirish</button>
+  <button class="btn secondary full" style="margin-top:9px" onclick="syncServices()">🔄 Xizmatlarni avtomatik yuklash</button>
+  <p class="small" id="apiStatus" style="margin-top:10px"></p>
+ </div>
+
+ <div class="admin-section panel" id="pricesSection">
+  <h3>💰 Narx va ustamalar</h3>
+  <div class="field">
+   <label>Ustama foizi</label>
+   <input id="markupPercent" type="number" min="0" max="500" placeholder="Masalan: 20">
+  </div>
+  <button class="btn full" onclick="saveMarkup()">Ustamani saqlash</button>
+  <p class="small" style="margin-top:8px">Ustama serverda hisoblanishi kerak. Bu maydon backend bilan ulanadi.</p>
+ </div>
+
+ <div class="admin-section panel" id="paymentSection">
   <h3>💳 To‘lov sozlamalari</h3>
-
-  <div class="setting">
-   <span>Avtomatik to‘lov</span>
-   <button class="switch" onclick="toggle(this)"></button>
+  <div class="field">
+   <label>Karta raqami</label>
+   <input id="cardNumber" placeholder="Karta raqami">
   </div>
-
-  <div class="setting">
-   <span>Oddiy to‘lov</span>
-   <button class="switch" onclick="toggle(this)"></button>
+  <div class="field">
+   <label>Karta egasi</label>
+   <input id="cardHolder" placeholder="Ism familiya">
   </div>
+  <button class="btn full" onclick="savePayment()">To‘lov ma’lumotlarini saqlash</button>
+  <p class="small" style="margin-top:8px">Avtomatik to‘lov hozircha o‘chirilgan. To‘lovlar admin tasdig‘i bilan amalga oshiriladi.</p>
  </div>
 
- <div class="admin-section">
-  <h3>🔧 Xizmatlarni boshqarish</h3>
-
-  <div class="setting">
-   <span>SMM xizmatlari</span>
-   <button class="switch active" onclick="toggle(this)"></button>
+ <div class="admin-section panel" id="broadcastSection">
+  <h3>📨 Xabar yuborish</h3>
+  <div class="field">
+   <label>Xabar matni</label>
+   <input id="broadcastText" placeholder="Xabar matni...">
   </div>
-
-  <div class="setting">
-   <span>Avto xabar</span>
-   <button class="switch active" onclick="toggle(this)"></button>
-  </div>
-
-  <div class="setting">
-   <span>Nik generator</span>
-   <button class="switch active" onclick="toggle(this)"></button>
-  </div>
-
-  <div class="setting">
-   <span>Kino markazi</span>
-   <button class="switch active" onclick="toggle(this)"></button>
-  </div>
-
-  <div class="setting">
-   <span>Emoji yaratish</span>
-   <button class="switch active" onclick="toggle(this)"></button>
-  </div>
-
-  <div class="setting">
-   <span>Bot yaratish</span>
-   <button class="switch active" onclick="toggle(this)"></button>
-  </div>
-
-  <div class="setting">
-   <span>Telegram Stars</span>
-   <button class="switch active" onclick="toggle(this)"></button>
-  </div>
-
-  <div class="setting">
-   <span>Premium</span>
-   <button class="switch active" onclick="toggle(this)"></button>
-  </div>
+  <button class="btn full" onclick="sendBroadcast()">Broadcast yuborish</button>
  </div>
 
+ <div class="admin-section panel" id="servicesSection">
+  <h3>🧩 Xizmat bo‘limlari</h3>
+  <div id="serviceToggles"></div>
+ </div>
 </section>
 
-<footer>
- MAKERCHI · Raqamli imkoniyatlar platformasi
-</footer>
-
-<div id="notice"></div>
+<footer>MAKERCHI · Raqamli imkoniyatlar platformasi</footer>
+<div id="notice" class="notice"></div>
 
 <script>
+/* ===============================
+   MAKERCHI MINI APP
+   Backend API manzilini keyin kiritamiz.
+================================ */
+
 const tg = window.Telegram.WebApp;
 tg.ready();
 tg.expand();
 
 const ADMIN_ID = 8589558984;
 
-const user = tg.initDataUnsafe?.user;
+/* Python backend joylashtirilgach shu yerga HTTPS manzil yoziladi.
+   Masalan: https://makerchi-api.example.com
+*/
+const API_BASE = "";
+
+const initData = tg.initData || "";
+const user = tg.initDataUnsafe?.user || null;
 const isAdmin = user && Number(user.id) === ADMIN_ID;
 
-if(isAdmin){
- document.getElementById("admin").style.display = "block";
+let currentServices = [];
+let selectedService = null;
+let specialCategory = "";
+let markup = 0;
+
+if(user){
+ document.getElementById("welcome").textContent =
+  "Salom, " + (user.first_name || "foydalanuvchi") + "! 👋";
 }
 
-function show(name){
- notify(name + " — tez orada ishga tushadi!");
+/* API bilan xavfsiz aloqa */
+async function api(path, method="GET", body=null){
+ if(!API_BASE){
+  throw new Error("Backend hali ulanmagan. Python serveri kerak.");
+ }
+ const options = {
+  method,
+  headers:{
+   "Content-Type":"application/json",
+   "Authorization":"tma " + initData
+  }
+ };
+ if(body) options.body = JSON.stringify(body);
+
+ const response = await fetch(API_BASE + path, options);
+ let data = {};
+ try{data = await response.json()}catch(e){}
+ if(!response.ok) throw new Error(data.detail || data.error || "Server xatosi");
+ return data;
 }
 
-function adminAction(name){
- notify(name + " bo‘limi backend bilan ulanishi kerak.");
+/* Sahifalarni boshqarish */
+function openPage(id){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ window.scrollTo(0,0);
+ if(id==="ordersPage") loadOrders();
+ if(id==="historyPage") loadHistory();
 }
-
-function toggle(button){
- button.classList.toggle("active");
- notify(button.classList.contains("active")
-  ? "Yoqildi (hozircha faqat ko‘rinish o‘zgardi)."
-  : "O‘chirildi (hozircha faqat ko‘rinish o‘zgardi).");
+function goHome(){openPage("homePage")}
+function adminSection(id){
+ document.getElementById(id).scrollIntoView({behavior:"smooth",block:"start"});
 }
-
 function notify(message){
- const n = document.getElementById("notice");
- n.innerText = message;
- n.style.display = "block";
+ const n=document.getElementById("notice");
+ n.textContent=message;
+ n.style.display="block";
  clearTimeout(window.noticeTimer);
- window.noticeTimer = setTimeout(()=>{
-  n.style.display = "none";
- },2500);
+ window.noticeTimer=setTimeout(()=>n.style.display="none",3000);
 }
-</script>
 
+/* Balans va profil */
+async function loadMe(){
+ try{
+  const data=await api("/api/me");
+  const amount=Number(data.balance || 0);
+  document.getElementById("balanceAmount").textContent=
+   amount.toLocaleString("uz-UZ")+" so‘m";
+ }catch(e){
+  document.getElementById("balanceAmount").textContent="— so‘m";
+ }
+}
+
+/* Xizmatlarni yuklash */
+async function loadServices(){
+ try{
+  const data=await api("/api/services");
+  currentServices=Array.isArray(data.services)?data.services:[];
+  renderServices(currentServices);
+ }catch(e){
+  document.getElementById("smmList").innerHTML=
+   '<div class="empty">Xizmatlar backend ulangach ko‘rinadi.</div>';
+ }
+}
+function renderServices(list){
+ const box=document.getElementById("smmList");
+ if(!list.length){
+  box.innerHTML='<div class="empty">Hozircha xizmat topilmadi.</div>';
+  return;
+ }
+ box.innerHTML="";
+ list.forEach(service=>{
+  const item=document.createElement("div");
+  item.className="service-item";
+  const left=document.createElement("div");
+  const name=document.createElement("h4");
+  name.textContent=service.name || service.title || "Xizmat";
+  const desc=document.createElement("p");
+  desc.textContent=service.category || "SMM xizmati";
+  left.append(name,desc);
+  const right=document.createElement("div");
+  right.className="price";
+  right.textContent=Number(service.price || 0).toLocaleString("uz-UZ")+" so‘m";
+  const btn=document.createElement("button");
+  btn.className="btn";
+  btn.textContent="Tanlash";
+  btn.style.marginTop="7px";
+  btn.onclick=()=>selectService(service);
+  right.appendChild(btn);
+  item.append(left,right);
+  box.appendChild(item);
+ });
+}
+function filterServices(){
+ const category=document.getElementById("smmCategory").value;
+ const query=document.getElementById("serviceSearch").value.toLowerCase();
+ const filtered=currentServices.filter(s=>{
+  const cat=String(s.category || "").toLowerCase();
+  const name=String(s.name || s.title || "").toLowerCase();
+  return (category==="all" || cat.includes(category)) && name.includes(query);
+ });
+ renderServices(filtered);
+}
+function openSmm(){
+ openPage("smmPage");
+ loadServices();
+}
+function selectService(service){
+ selectedService=service;
+ document.getElementById("orderServiceName").textContent=
+  service.name || service.title || "Xizmat";
+ document.getElementById("orderDescription").textContent=
+  "Xizmat ID: "+(service.id ?? service.service_id ?? "—")+
+  " · Narx: "+Number(service.price || 0).toLocaleString("uz-UZ")+" so‘m";
+ document.getElementById("orderQuantity").value="";
+ document.getElementById("orderLink").value="";
+ document.getElementById("orderPrice").textContent="— so‘m";
+ openPage("orderPage");
+}
+function calculateOrder(){
+ if(!selectedService)return;
+ const qty=Number(document.getElementById("orderQuantity").value || 0);
+ const rate=Number(selectedService.price || 0);
+ const min=Number(selectedService.min || 1);
+ const max=Number(selectedService.max || 999999999);
+ if(qty<min || qty>max){
+  document.getElementById("orderPrice").textContent="Miqdorni tekshiring";
+  return;
+ }
+ const total=rate*qty/1000;
+ document.getElementById("orderPrice").textContent=
+  Math.ceil(total).toLocaleString("uz-UZ")+" so‘m";
+}
+async function submitOrder(){
+ if(!selectedService)return;
+ const link=document.getElementById("orderLink").value.trim();
+ const quantity=Number(document.getElementById("orderQuantity").value);
+ if(!link || !quantity || quantity<1){
+  notify("Havola va miqdorni to‘g‘ri kiriting.");
+  return;
+ }
+ try{
+  const result=await api("/api/buy","POST",{
+   service_id:selectedService.id ?? selectedService.service_id,
+   link,quantity
+  });
+  notify(result.message || "Buyurtma qabul qilindi!");
+  loadMe();
+  openPage("ordersPage");
+ }catch(e){notify(e.message)}
+}
+
+/* Stars va Premium kataloglari */
+function openCategory(category){
+ specialCategory=category;
+ const isStars=category==="stars";
+ document.getElementById("specialTitle").textContent=
+  isStars?"⭐ Telegram Stars":"💎 Telegram Premium";
+ document.getElementById("specialInfo").textContent=
+  isStars?"Telegram Stars bo‘yicha mavjud takliflar.":"Telegram Premium bo‘yicha mavjud takliflar.";
+ const box=document.getElementById("specialList");
+ box.innerHTML='<div class="empty">Xizmatlar backend ulangach ko‘rinadi.</div>';
+ openPage("specialPage");
+ loadSpecial(category);
+}
+async function loadSpecial(category){
+ try{
+  const data=await api("/api/services?category="+encodeURIComponent(category));
+  const list=Array.isArray(data.services)?data.services:[];
+  const box=document.getElementById("specialList");
+  box.innerHTML="";
+  if(!list.length){
+   box.innerHTML='<div class="empty">Hozircha xizmat mavjud emas.</div>';
+   return;
+  }
+  list.forEach(s=>{
+   const row=document.createElement("div");
+   row.className="service-item";
+   const left=document.createElement("div");
+   const title=document.createElement("h4");
+   title.textContent=s.name || s.title || "Xizmat";
+   const desc=document.createElement("p");
+   desc.textContent=s.description || "Mavjud xizmat";
+   left.append(title,desc);
+   const right=document.createElement("div");
+   right.className="price";
+   right.textContent=Number(s.price || 0).toLocaleString("uz-UZ")+" so‘m";
+   const btn=document.createElement("button");
+   btn.className="btn";
+   btn.textContent="Tanlash";
+   btn.style.marginTop="7px";
+   btn.onclick=()=>selectService(s);
+   right.append(btn);
+   row.append(left,right);
+   box.append(row);
+  });
+ }catch(e){}
+}
+
+/* Hisobni to‘ldirish */
+async function startTopup(){
+ const amount=Number(document.getElementById("topupAmount").value);
+ if(!amount || amount<1000){
+  notify("Eng kam summa 1 000 so‘m.");
+  return;
+ }
+ try{
+  const data=await api("/api/topup","POST",{amount});
+  notify(data.message || "To‘lov so‘rovi yaratildi.");
+ }catch(e){
+  notify(e.message);
+ }
+}
+
+/* Buyurtmalar va balans tarixi */
+async function loadOrders(){
+ const box=document.getElementById("ordersList");
+ try{
+  const data=await api("/api/orders");
+  const list=data.orders || [];
+  if(!list.length){box.innerHTML='<div class="empty">Buyurtmalar yo‘q.</div>';return}
+  box.innerHTML="";
+  list.forEach(o=>{
+   const row=document.createElement("div");
+   row.className="order-item";
+   const left=document.createElement("div");
+   const h=document.createElement("h4");
+   h.textContent=o.service_name || ("Buyurtma #"+o.id);
+   const p=document.createElement("p");
+   p.textContent="ID: "+o.id+" · "+(o.status || "Kutilmoqda");
+   left.append(h,p);
+   const price=document.createElement("span");
+   price.className="price";
+   price.textContent=Number(o.price || 0).toLocaleString("uz-UZ")+" so‘m";
+   row.append(left,price);box.append(row);
+  });
+ }catch(e){box.innerHTML='<div class="empty">Buyurtmalarni ko‘rish uchun backend kerak.</div>'}
+}
+async function loadHistory(){
+ const box=document.getElementById("historyList");
+ try{
+  const data=await api("/api/history");
+  const list=data.transactions || [];
+  if(!list.length){box.innerHTML='<div class="empty">Tarix hozircha bo‘sh.</div>';return}
+  box.innerHTML="";
+  list.forEach(t=>{
+   const row=document.createElement("div");
+   row.className="history-item";
+   const left=document.createElement("div");
+   const h=document.createElement("h4");
+   h.textContent=t.description || t.type || "Tranzaksiya";
+   const p=document.createElement("p");
+   p.textContent=t.created_at || "";
+   left.append(h,p);
+   const amount=document.createElement("strong");
+   amount.className="price";
+   amount.textContent=Number(t.amount || 0).toLocaleString("uz-UZ")+" so‘m";
+   row.append(left,amount);box.append(row);
+  });
+ }catch(e){box.innerHTML='<div class="empty">Tarix backend ulangach ko‘rinadi.</div>'}
+}
+
+/* Admin funksiyalari */
+if(isAdmin){
+ const adminCard=document.createElement("div");
+ adminCard.className="card";
+ adminCard.innerHTML='<div class="emoji">⚙️</div><h3>Admin panel</h3><p>Platformani boshqarish</p>';
+ adminCard.onclick=()=>openPage("adminPage");
+ document.querySelector("#homePage .grid").appendChild(adminCard);
+ buildServiceToggles();
+}
+function buildServiceToggles(){
+ const names=["SMM xizmatlari","Avto xabar","Nik generator","Kino markazi","Emoji yaratish","Bot yaratish","Telegram Stars","Premium"];
+ const box=document.getElementById("serviceToggles");
+ names.forEach(name=>{
+  const row=document.createElement("div");
+  row.className="setting";
+  const label=document.createElement("span");
+  label.textContent=name;
+  const btn=document.createElement("button");
+  btn.className="switch active";
+  btn.onclick=()=>toggleService(name,btn);
+  row.append(label,btn);box.append(row);
+ });
+}
+async function toggleService(name,button){
+ const enabled=!button.classList.contains("active");
+ try{
+  await api("/api/admin/services/toggle","POST",{name,enabled});
+  button.classList.toggle("active",enabled);
+  notify("Xizmat sozlamasi saqlandi.");
+ }catch(e){notify(e.message)}
+}
+async function saveApi(){
+ const url=document.getElementById("apiUrl").value.trim();
+ const key=document.getElementById("apiKey").value.trim();
+ if(!url || !key){notify("API manzili va kalitini kiriting.");return}
+ try{
+  const data=await api("/api/admin/smm/config","POST",{api_url:url,api_key:key});
+  document.getElementById("apiKey").value="";
+  document.getElementById("apiStatus").textContent=data.message || "Sozlamalar serverga yuborildi.";
+  notify("API sozlamalari yuborildi.");
+ }catch(e){notify(e.message)}
+}
+async function testApi(){
+ try{
+  const data=await api("/api/admin/smm/test","POST",{});
+  document.getElementById("apiStatus").textContent=data.message || "Tekshiruv yakunlandi.";
+  notify(data.message || "API tekshirildi.");
+ }catch(e){notify(e.message)}
+}
+async function syncServices(){
+ try{
+  const data=await api("/api/admin/smm/sync","POST",{});
+  document.getElementById("apiStatus").textContent=data.message || "Xizmatlar yangilandi.";
+  notify(data.message || "Xizmatlar yuklandi.");
+  loadServices();
+ }catch(e){notify(e.message)}
+}
+async function saveMarkup(){
+ const percent=Number(document.getElementById("markupPercent").value);
+ if(percent<0 || percent>500){notify("Ustama 0–500 oralig‘ida bo‘lsin.");return}
+ try{
+  const data=await api("/api/admin/markup","POST",{percent});
+  notify(data.message || "Ustama saqlandi.");
+ }catch(e){notify(e.message)}
+}
+async function savePayment(){
+ const card_number=document.getElementById("cardNumber").value.trim();
+ const card_holder=document.getElementById("cardHolder").value.trim();
+ if(!card_number || !card_holder){notify("Karta ma’lumotlarini to‘ldiring.");return}
+ try{
+  const data=await api("/api/admin/payment-settings","POST",{card_number,card_holder});
+  notify(data.message || "To‘lov ma’lumotlari saqlandi.");
+ }catch(e){notify(e.message)}
+}
+async function sendBroadcast(){
+ const message=document.getElementById("broadcastText").value.trim();
+ if(!message){notify("Xabar matnini yozing.");return}
+ if(!confirm("Barcha foydalanuvchilarga yuborilsinmi?"))return;
+ try{
+  const data=await api("/api/admin/broadcast","POST",{message});
+  notify(data.message || "Xabar yuborish boshlandi.");
+ }catch(e){notify(e.message)}
+}
+async function loadStats(){
+ try{
+  const data=await api("/api/admin/stats");
+  document.getElementById("statsInfo").textContent=
+   "Foydalanuvchilar: "+(data.users ?? "—")+
+   " | Buyurtmalar: "+(data.orders ?? "—")+
+   " | Daromad: "+(data.revenue ?? "—");
+ }catch(e){notify(e.message)}
+}
+
+/* Dastlabki ishga tushirish */
+loadMe();
+</script>
 </body>
 </html>
